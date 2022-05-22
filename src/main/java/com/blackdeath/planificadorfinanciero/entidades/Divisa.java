@@ -1,5 +1,7 @@
 package com.blackdeath.planificadorfinanciero.entidades;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +18,7 @@ import lombok.Data;
  * @since 22-05-2022
  */
 @Data
-@Table
+@Table(name = "divisas")
 @Entity
 public class Divisa {
 
@@ -39,4 +41,10 @@ public class Divisa {
 	 */
 	@Column(unique = true, nullable = false, updatable = false, length = 3)
 	private String abreviacion;
+
+	/**
+	 * Fecha en que se guardó esta divisa
+	 */
+	@Column(unique = false, nullable = false, updatable = false)
+	private Date fechaGuardado;
 }

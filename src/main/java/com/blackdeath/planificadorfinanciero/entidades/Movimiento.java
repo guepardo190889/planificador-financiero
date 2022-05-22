@@ -24,7 +24,7 @@ import lombok.Data;
  *
  */
 @Data
-@Table
+@Table(name = "movimientos")
 @Entity
 public class Movimiento {
 

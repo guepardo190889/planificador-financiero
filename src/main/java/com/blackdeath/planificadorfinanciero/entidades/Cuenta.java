@@ -3,8 +3,12 @@ package com.blackdeath.planificadorfinanciero.entidades;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Table;
+
+import lombok.Data;
 
 /**
  * Cuenta, monedero o lugar en donde se guarda dinero
@@ -13,6 +17,9 @@ import javax.persistence.GenerationType;
  * @since 22-05-2022
  *
  */
+@Data
+@Table(name = "cuentas")
+@Entity
 public class Cuenta {
 
 	/**
