@@ -13,6 +13,6 @@ import com.blackdeath.planificadorfinanciero.entidades.Divisa;
  *
  */
 @Repository
-public interface DivisaRepository extends JpaRepository<Divisa, Long> {
+public interface DivisasRepository extends JpaRepository<Divisa, Long> {
 
 }

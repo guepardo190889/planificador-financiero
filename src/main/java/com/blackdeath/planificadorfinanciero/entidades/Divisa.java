@@ -9,7 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.blackdeath.planificadorfinanciero.modelos.DivisaGuardadoModel;
+
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Divisa o moneda
@@ -17,6 +20,7 @@ import lombok.Data;
  * @author Seth Karim Luis Martínez
  * @since 22-05-2022
  */
+@NoArgsConstructor
 @Data
 @Table(name = "divisas")
 @Entity
@@ -47,4 +51,15 @@ public class Divisa {
 	 */
 	@Column(unique = false, nullable = false, updatable = false)
 	private Date fechaGuardado;
+
+	/**
+	 * Constructor que inicializa campos desde una {@link DivisaGuardadoModel}
+	 * 
+	 * @param divisa
+	 */
+	public Divisa(DivisaGuardadoModel divisa) {
+		nombre = divisa.getNombre();
+		abreviacion = divisa.getAbreviacion();
+		fechaGuardado = new Date();
+	}
 }

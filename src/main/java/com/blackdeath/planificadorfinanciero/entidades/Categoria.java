@@ -1,5 +1,7 @@
 package com.blackdeath.planificadorfinanciero.entidades;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.blackdeath.planificadorfinanciero.enums.TipoCategoria;
+import com.blackdeath.planificadorfinanciero.modelos.CategoriaGuardadoModel;
 
 import lombok.Data;
 
@@ -51,4 +54,22 @@ public class Categoria {
 	 */
 	@Column(unique = false, nullable = true, updatable = true, length = 128)
 	private String descripcion;
+
+	/**
+	 * Fecha en que se guardó esta categoría
+	 */
+	@Column(unique = false, nullable = false, updatable = false)
+	private Date fechaGuardado;
+
+	/**
+	 * Constructor que inicializa campos desde una {@link CategoriaGuardadoModel}
+	 * 
+	 * @param categoria
+	 */
+	public Categoria(CategoriaGuardadoModel categoria) {
+		nombre = categoria.getNombre();
+		tipo = categoria.getTipo();
+		descripcion = categoria.getDescripcion();
+		fechaGuardado = new Date();
+	}
 }

@@ -6,8 +6,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.blackdeath.planificadorfinanciero.entidades.Divisa;
+import com.blackdeath.planificadorfinanciero.modelos.DivisaGuardadoModel;
 import com.blackdeath.planificadorfinanciero.modelos.DivisaModel;
-import com.blackdeath.planificadorfinanciero.repositorios.DivisaRepository;
+import com.blackdeath.planificadorfinanciero.repositorios.DivisasRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,12 +21,24 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @Service
-public class DivisaService {
+public class DivisasService {
 
-	private final DivisaRepository repository;
+	private final DivisasRepository repository;
 
 	/**
-	 * Devuelve una lista con todas las divisas
+	 * Guarda una nueva {@link Divisa}
+	 * 
+	 * @param divisa
+	 * @return
+	 */
+	public DivisaModel guardar(DivisaGuardadoModel divisa) {
+		Divisa divisaGuardada = repository.save(new Divisa(divisa));
+
+		return new DivisaModel(divisaGuardada);
+	}
+
+	/**
+	 * Devuelve un listado con todas las divisas
 	 * 
 	 * @return
 	 */
