@@ -37,7 +37,7 @@ public class Divisa {
 	/**
 	 * Nombre de esta divisa
 	 */
-	@Column(unique = true, nullable = false, updatable = false, length = 16)
+	@Column(unique = true, nullable = false, updatable = false, length = 32)
 	private String nombre;
 
 	/**
@@ -49,7 +49,7 @@ public class Divisa {
 	/**
 	 * Fecha en que se guardó esta divisa
 	 */
-	@Column(unique = false, nullable = false, updatable = false)
+	@Column(name = "fecha_guardado", unique = false, nullable = false, updatable = false)
 	private Date fechaGuardado;
 
 	/**

@@ -27,7 +27,7 @@ import lombok.RequiredArgsConstructor;
  *
  */
 @RequiredArgsConstructor
-@RequestMapping("/divisas")
+@RequestMapping("/api/v1/divisas")
 @RestController
 public class DivisasController {
 
