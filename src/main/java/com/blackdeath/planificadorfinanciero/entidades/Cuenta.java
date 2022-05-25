@@ -1,12 +1,16 @@
 package com.blackdeath.planificadorfinanciero.entidades;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -21,7 +25,9 @@ import lombok.Data;
 @Data
 @Table(name = "cuentas")
 @Entity
-public class Cuenta {
+public class Cuenta implements Serializable {
+
+	private static final long serialVersionUID = -785218259642822988L;
 
 	/**
 	 * Identificador único de esta cuenta
@@ -42,4 +48,12 @@ public class Cuenta {
 	 */
 	@Column(unique = false, nullable = false, updatable = true, precision = 19, scale = 2)
 	private BigDecimal balance;
+
+	/**
+	 * {@link Divisa de esta cuenta}
+	 */
+	@JoinColumn(name = "id_divisa")
+	@ManyToOne(fetch = FetchType.LAZY)
+	Divisa divisa;
+
 }

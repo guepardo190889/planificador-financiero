@@ -1,5 +1,6 @@
 package com.blackdeath.planificadorfinanciero.entidades;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -24,7 +25,9 @@ import lombok.NoArgsConstructor;
 @Data
 @Table(name = "divisas")
 @Entity
-public class Divisa {
+public class Divisa implements Serializable {
+
+	private static final long serialVersionUID = -6949771166570269658L;
 
 	/**
 	 * Identificador único de esta divisa
