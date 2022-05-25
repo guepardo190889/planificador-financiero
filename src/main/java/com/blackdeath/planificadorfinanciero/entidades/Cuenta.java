@@ -2,6 +2,7 @@ package com.blackdeath.planificadorfinanciero.entidades;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.blackdeath.planificadorfinanciero.modelos.CuentaGuardadoModel;
+
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Cuenta, monedero o lugar en donde se guarda dinero
@@ -22,6 +26,7 @@ import lombok.Data;
  * @since 22-05-2022
  *
  */
+@NoArgsConstructor
 @Data
 @Table(name = "cuentas")
 @Entity
@@ -50,10 +55,29 @@ public class Cuenta implements Serializable {
 	private BigDecimal balance;
 
 	/**
+	 * Fecha en que se guardó esta cuenta
+	 */
+	@Column(name = "fecha_guardado", unique = false, nullable = false, updatable = false)
+	private Date fechaGuardado;
+
+	/**
 	 * {@link Divisa de esta cuenta}
 	 */
 	@JoinColumn(name = "id_divisa")
 	@ManyToOne(fetch = FetchType.LAZY)
-	Divisa divisa;
+	private Divisa divisa;
+
+	/**
+	 * Constructor que inicializa los campos necesarios para guardar esta cuenta des
+	 * de una {@link CuentaGuardadoModel}
+	 * 
+	 * @param cuenta
+	 */
+	public Cuenta(CuentaGuardadoModel cuenta) {
+		nombre = cuenta.getNombre();
+		balance = cuenta.getBalance();
+		fechaGuardado = new Date();
+		divisa = new Divisa(cuenta.getDivisaId());
+	}
 
 }

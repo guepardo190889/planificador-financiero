@@ -28,17 +28,17 @@ public class DivisasService {
 	/**
 	 * Guarda una nueva {@link Divisa}
 	 * 
-	 * @param divisa
+	 * @param divisaGuardadoModel
 	 * @return
 	 */
-	public DivisaModel guardar(DivisaGuardadoModel divisa) {
-		Divisa divisaGuardada = repository.save(new Divisa(divisa));
+	public DivisaModel guardar(DivisaGuardadoModel divisaGuardadoModel) {
+		Divisa divisaGuardada = repository.save(new Divisa(divisaGuardadoModel));
 
 		return new DivisaModel(divisaGuardada);
 	}
 
 	/**
-	 * Devuelve un listado con todas las divisas
+	 * Busca y devuelve un listado con todas las divisas
 	 * 
 	 * @return
 	 */

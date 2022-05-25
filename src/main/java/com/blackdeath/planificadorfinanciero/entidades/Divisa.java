@@ -56,7 +56,8 @@ public class Divisa implements Serializable {
 	private Date fechaGuardado;
 
 	/**
-	 * Constructor que inicializa campos desde una {@link DivisaGuardadoModel}
+	 * Constructor que inicializa campos necesarios para guardar esta divisa desde
+	 * una {@link DivisaGuardadoModel}
 	 * 
 	 * @param divisa
 	 */
@@ -64,5 +65,14 @@ public class Divisa implements Serializable {
 		nombre = divisa.getNombre();
 		abreviacion = divisa.getAbreviacion();
 		fechaGuardado = new Date();
+	}
+
+	/**
+	 * Constructor que asigna el identificador único de esta divisa
+	 * 
+	 * @param id
+	 */
+	public Divisa(Long id) {
+		this.id = id;
 	}
 }
