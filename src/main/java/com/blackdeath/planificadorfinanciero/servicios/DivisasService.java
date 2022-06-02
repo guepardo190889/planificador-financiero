@@ -2,8 +2,11 @@ package com.blackdeath.planificadorfinanciero.servicios;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.blackdeath.planificadorfinanciero.entidades.Divisa;
 import com.blackdeath.planificadorfinanciero.modelos.DivisaGuardadoModel;
@@ -43,15 +46,31 @@ public class DivisasService {
 	 * @return
 	 */
 	public List<DivisaModel> buscar() {
-		List<Divisa> divisas = repository.findAll();
+		List<Divisa> divisasEncontradas = repository.findAll();
 
 		List<DivisaModel> modelos = new ArrayList<>();
 
-		for (Divisa divisa : divisas) {
-			modelos.add(new DivisaModel(divisa));
+		for (Divisa divisaEncontrada : divisasEncontradas) {
+			modelos.add(new DivisaModel(divisaEncontrada));
 		}
 
 		return modelos;
+	}
+
+	/**
+	 * Busca y devuelve una divisa por su identificador único
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public DivisaModel buscarPorId(Long id) {
+		Optional<Divisa> divisaEncontrada = repository.findById(id);
+
+		if (divisaEncontrada.isPresent()) {
+			return new DivisaModel(divisaEncontrada.get());
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
 	}
 
 }
