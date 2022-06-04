@@ -6,7 +6,7 @@ package com.blackdeath.planificadorfinanciero.modelos;
 import javax.validation.constraints.NotEmpty;
 
 import com.blackdeath.planificadorfinanciero.entidades.Categoria;
-import com.blackdeath.planificadorfinanciero.enums.TipoCategoria;
+import com.blackdeath.planificadorfinanciero.enumeradores.TipoCategoria;
 import com.sun.istack.NotNull;
 
 import lombok.Data;

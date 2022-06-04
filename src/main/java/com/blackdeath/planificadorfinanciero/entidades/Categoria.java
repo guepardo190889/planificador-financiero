@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.blackdeath.planificadorfinanciero.enums.TipoCategoria;
+import com.blackdeath.planificadorfinanciero.enumeradores.TipoCategoria;
 import com.blackdeath.planificadorfinanciero.modelos.CategoriaGuardadoModel;
 
 import lombok.Data;

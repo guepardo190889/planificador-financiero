@@ -1,11 +1,16 @@
 package com.blackdeath.planificadorfinanciero.controladores;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +24,10 @@ import com.blackdeath.planificadorfinanciero.entidades.Divisa;
 import com.blackdeath.planificadorfinanciero.modelos.DivisaGuardadoModel;
 import com.blackdeath.planificadorfinanciero.modelos.DivisaModel;
 import com.blackdeath.planificadorfinanciero.servicios.DivisasService;
+import com.blackdeath.planificadorfinanciero.utilidades.constantes.Mensajes;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * Controlador para {@link Divisa}
@@ -29,6 +36,7 @@ import lombok.RequiredArgsConstructor;
  * @since 22-05-2022
  *
  */
+@Log4j2
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/divisas")
@@ -68,7 +76,28 @@ public class DivisasController {
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	public DivisaModel buscarPorId(@NotNull @PathVariable Long id) {
-		return service.buscarPorId(id);
+	public ResponseEntity<?> buscarPorId(@NotNull @PathVariable Long id) {
+		Map<String, Object> response = new HashMap<>();
+
+		Optional<Divisa> divisaEncontrada = null;
+
+		try {
+			divisaEncontrada = service.buscarPorId(id);
+		} catch (DataAccessException dae) {
+			log.error(dae, dae);
+
+			response.put("mensaje", Mensajes.GENERICO_ERROR_CONSULTA);
+			response.put("error", dae.getMostSpecificCause().getMessage());
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		if (!divisaEncontrada.isPresent()) {
+			response.put("mensaje", Mensajes.DIVISA_NO_ENCONTRADA);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+
+		response.put("mensaje", Mensajes.GENERICO_EXITO_CONSULTA);
+		response.put("respuesta", new DivisaModel(divisaEncontrada.get()));
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 }

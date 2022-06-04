@@ -1,4 +1,4 @@
-package com.blackdeath.planificadorfinanciero.enums;
+package com.blackdeath.planificadorfinanciero.enumeradores;
 
 /**
  * Enumerador de tipos de movimientos

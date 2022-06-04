@@ -1,7 +1,7 @@
 package com.blackdeath.planificadorfinanciero.modelos;
 
 import com.blackdeath.planificadorfinanciero.entidades.Categoria;
-import com.blackdeath.planificadorfinanciero.enums.TipoCategoria;
+import com.blackdeath.planificadorfinanciero.enumeradores.TipoCategoria;
 
 import lombok.Data;
 
