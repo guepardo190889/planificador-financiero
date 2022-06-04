@@ -79,10 +79,18 @@ public class DivisasController {
 	public ResponseEntity<?> buscarPorId(@NotNull @PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();
 
-		Optional<Divisa> divisaEncontrada = null;
-
 		try {
-			divisaEncontrada = service.buscarPorId(id);
+			Optional<Divisa> divisaEncontrada = service.buscarPorId(id);
+
+			if (!divisaEncontrada.isPresent()) {
+				response.put("mensaje", Mensajes.DIVISA_NO_ENCONTRADA);
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+			}
+
+			response.put("mensaje", Mensajes.GENERICO_EXITO_CONSULTA);
+			response.put("respuesta", new DivisaModel(divisaEncontrada.get()));
+
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 		} catch (DataAccessException dae) {
 			log.error(dae, dae);
 
@@ -90,14 +98,5 @@ public class DivisasController {
 			response.put("error", dae.getMostSpecificCause().getMessage());
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
-		if (!divisaEncontrada.isPresent()) {
-			response.put("mensaje", Mensajes.DIVISA_NO_ENCONTRADA);
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
-		}
-
-		response.put("mensaje", Mensajes.GENERICO_EXITO_CONSULTA);
-		response.put("respuesta", new DivisaModel(divisaEncontrada.get()));
-		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 }
