@@ -30,11 +30,6 @@ public class Divisa implements Serializable {
 	private static final long serialVersionUID = -6949771166570269658L;
 
 	/**
-	 * Nombre de esta entidad usado como llave
-	 */
-	public static final String LLAVE = "divisa";
-
-	/**
 	 * Identificador único de esta divisa
 	 */
 	@Id
@@ -57,7 +52,7 @@ public class Divisa implements Serializable {
 	/**
 	 * Indica si esta divisa es la opción por defecto entre todas
 	 */
-	@Column(name = "por_defecto", unique = false, nullable = false, updatable = true, columnDefinition = "default column false")
+	@Column(name = "por_defecto", unique = false, nullable = false, updatable = true, columnDefinition = "boolean default false")
 	private Boolean porDefecto;
 
 	/**

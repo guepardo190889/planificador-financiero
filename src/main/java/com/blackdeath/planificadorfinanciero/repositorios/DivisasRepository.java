@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.blackdeath.planificadorfinanciero.entidades.Divisa;
 
@@ -32,7 +33,8 @@ public interface DivisasRepository extends JpaRepository<Divisa, Long> {
 	 * 
 	 * @param id
 	 */
+	@Transactional
 	@Modifying
-	@Query("update Divisa d set d.porDefecto = false where d.id = :id")
+	@Query("update Divisa d set d.porDefecto = false where d.id not in (:id)")
 	void actualizarPorDefectoFalsoExcepto(@Param("id") Long id);
 }
