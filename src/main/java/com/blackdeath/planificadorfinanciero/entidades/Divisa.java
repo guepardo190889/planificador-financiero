@@ -83,12 +83,4 @@ public class Divisa implements Serializable {
 		this.id = id;
 	}
 
-	/**
-	 * Indica si esta divisa es la opción por defecto entre todas
-	 * 
-	 * @return
-	 */
-	public boolean isPorDefecto() {
-		return porDefecto;
-	}
 }

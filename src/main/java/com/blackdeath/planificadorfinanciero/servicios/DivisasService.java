@@ -43,7 +43,7 @@ public class DivisasService {
 
 		Divisa divisaGuardada = repository.save(new Divisa(divisaGuardadoModel));
 
-		if (divisaGuardada.isPorDefecto()) {
+		if (divisaGuardada.getPorDefecto()) {
 			repository.actualizarPorDefectoFalsoExcepto(divisaGuardada.getId());
 		}
 
@@ -70,7 +70,7 @@ public class DivisasService {
 
 				Divisa divisaGuardada = repository.save(divisaEncontrada.get());
 
-				if (divisaGuardada.isPorDefecto()) {
+				if (divisaGuardada.getPorDefecto()) {
 					repository.actualizarPorDefectoFalsoExcepto(divisaGuardada.getId());
 				}
 
