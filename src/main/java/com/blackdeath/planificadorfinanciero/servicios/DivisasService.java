@@ -66,7 +66,6 @@ public class DivisasService {
 			if (divisaConCodigoCoincidente == null) {
 				divisaEncontrada.get().setNombre(divisa.getNombre());
 				divisaEncontrada.get().setCodigo(divisa.getCodigo());
-				divisaEncontrada.get().setSimbolo(divisa.getSimbolo());
 				divisaEncontrada.get().setPorDefecto(divisa.getPorDefecto());
 
 				Divisa divisaGuardada = repository.save(divisaEncontrada.get());

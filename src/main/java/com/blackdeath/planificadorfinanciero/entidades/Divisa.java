@@ -55,22 +55,16 @@ public class Divisa implements Serializable {
 	private String codigo;
 
 	/**
-	 * Símbolo de esta divisa
+	 * Indica si esta divisa es la opción por defecto entre todas
 	 */
-	@Column(unique = false, nullable = false, updatable = true, length = 1)
-	private String simbolo;
+	@Column(name = "por_defecto", unique = false, nullable = false, updatable = true, columnDefinition = "default column false")
+	private Boolean porDefecto;
 
 	/**
 	 * Fecha en que se guardó esta divisa
 	 */
 	@Column(name = "fecha_guardado", unique = false, nullable = false, updatable = false)
 	private Date fechaGuardado;
-
-	/**
-	 * Indica si esta divisa es la opción por defecto entre todas
-	 */
-	@Column(name = "por_defecto", unique = false, nullable = false, updatable = true, columnDefinition = "default column false")
-	private Boolean porDefecto;
 
 	/**
 	 * Constructor que inicializa campos necesarios para guardar esta divisa desde
@@ -81,7 +75,6 @@ public class Divisa implements Serializable {
 	public Divisa(DivisaGuardadoModel divisa) {
 		nombre = divisa.getNombre();
 		codigo = divisa.getCodigo();
-		simbolo = divisa.getSimbolo();
 		porDefecto = divisa.getPorDefecto();
 		fechaGuardado = new Date();
 	}
