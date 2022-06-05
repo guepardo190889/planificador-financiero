@@ -35,4 +35,18 @@ public class DivisaActualizadoModel {
 	@Size(min = 3, max = 3, message = "Código requiere tres caracteres")
 	private String codigo;
 
+	/**
+	 * Símbolo de esta divisa
+	 */
+	@NotNull
+	@NotEmpty(message = "Símbolo es erquerido")
+	@Size(min = 1, max = 1)
+	private String simbolo;
+
+	/**
+	 * Indica si esta divisa es la opción por defecto entre todas
+	 */
+	@NotNull
+	private Boolean porDefecto;
+
 }

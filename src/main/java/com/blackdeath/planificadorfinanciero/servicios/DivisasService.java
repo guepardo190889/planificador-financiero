@@ -41,7 +41,13 @@ public class DivisasService {
 			throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
 		}
 
-		return repository.save(new Divisa(divisaGuardadoModel));
+		Divisa divisaGuardada = repository.save(new Divisa(divisaGuardadoModel));
+
+		if (divisaGuardada.isPorDefecto()) {
+			repository.actualizarPorDefectoFalsoExcepto(divisaGuardada.getId());
+		}
+
+		return divisaGuardada;
 	}
 
 	/**
@@ -60,8 +66,16 @@ public class DivisasService {
 			if (divisaConCodigoCoincidente == null) {
 				divisaEncontrada.get().setNombre(divisa.getNombre());
 				divisaEncontrada.get().setCodigo(divisa.getCodigo());
+				divisaEncontrada.get().setSimbolo(divisa.getSimbolo());
+				divisaEncontrada.get().setPorDefecto(divisa.getPorDefecto());
 
-				return repository.save(divisaEncontrada.get());
+				Divisa divisaGuardada = repository.save(divisaEncontrada.get());
+
+				if (divisaGuardada.isPorDefecto()) {
+					repository.actualizarPorDefectoFalsoExcepto(divisaGuardada.getId());
+				}
+
+				return divisaGuardada;
 			} else {
 				throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
 			}

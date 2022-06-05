@@ -65,7 +65,7 @@ public class DivisasController {
 			Divisa divisaGuardada = service.guardar(divisa);
 
 			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_GUARDADO);
-			response.put(Divisa.NOMBRE, new DivisaModel(divisaGuardada));
+			response.put(Divisa.LLAVE, new DivisaModel(divisaGuardada));
 
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 		} catch (DataAccessException dae) {
@@ -98,7 +98,7 @@ public class DivisasController {
 			Divisa divisaActualizada = service.actualizar(id, divisa);
 
 			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_ACTUALIZADO);
-			response.put(Divisa.NOMBRE, new DivisaModel(divisaActualizada));
+			response.put(Divisa.LLAVE, new DivisaModel(divisaActualizada));
 
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 		} catch (DataAccessException dae) {
@@ -131,7 +131,7 @@ public class DivisasController {
 
 			if (divisaEliminada.isPresent()) {
 				response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_ELIMINADO);
-				response.put(Divisa.NOMBRE, new DivisaModel(divisaEliminada.get()));
+				response.put(Divisa.LLAVE, new DivisaModel(divisaEliminada.get()));
 
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 			} else {
@@ -166,7 +166,7 @@ public class DivisasController {
 			}
 
 			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_CONSULTA);
-			response.put(Divisa.NOMBRE, modelos);
+			response.put(Divisa.LLAVE, modelos);
 
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 
@@ -200,7 +200,7 @@ public class DivisasController {
 			}
 
 			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_CONSULTA);
-			response.put(Divisa.NOMBRE, new DivisaModel(divisaEncontrada.get()));
+			response.put(Divisa.LLAVE, new DivisaModel(divisaEncontrada.get()));
 
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 		} catch (DataAccessException dae) {

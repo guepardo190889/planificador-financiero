@@ -30,6 +30,16 @@ public class DivisaModel {
 	private String codigo;
 
 	/**
+	 * Símbolo de esta divisa
+	 */
+	private String simbolo;
+
+	/**
+	 * Indica si esta divisa es la opción por defecto entre todas
+	 */
+	private Boolean porDefecto;
+
+	/**
 	 * Constructor que inicializa los campos a partir de una {@link Divisa}
 	 * 
 	 * @param divisa
@@ -38,5 +48,7 @@ public class DivisaModel {
 		id = divisa.getId();
 		nombre = divisa.getNombre();
 		codigo = divisa.getCodigo();
+		simbolo = divisa.getSimbolo();
+		porDefecto = divisa.getPorDefecto();
 	}
 }
