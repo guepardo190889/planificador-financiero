@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.blackdeath.planificadorfinanciero.entidades.Divisa;
-import com.blackdeath.planificadorfinanciero.modelos.DivisaActualizadoModel;
-import com.blackdeath.planificadorfinanciero.modelos.DivisaGuardadoModel;
-import com.blackdeath.planificadorfinanciero.modelos.DivisaModel;
+import com.blackdeath.planificadorfinanciero.modelos.divisa.DivisaActualizadoModel;
+import com.blackdeath.planificadorfinanciero.modelos.divisa.DivisaGuardadoModel;
+import com.blackdeath.planificadorfinanciero.modelos.divisa.DivisaModel;
 import com.blackdeath.planificadorfinanciero.servicios.DivisasService;
 import com.blackdeath.planificadorfinanciero.utilerias.enumeradores.LlaveRespuesta;
 import com.blackdeath.planificadorfinanciero.utilidades.constantes.Mensajes;

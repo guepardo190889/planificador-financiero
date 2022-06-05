@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.blackdeath.planificadorfinanciero.entidades.Divisa;
-import com.blackdeath.planificadorfinanciero.modelos.DivisaActualizadoModel;
-import com.blackdeath.planificadorfinanciero.modelos.DivisaGuardadoModel;
+import com.blackdeath.planificadorfinanciero.modelos.divisa.DivisaActualizadoModel;
+import com.blackdeath.planificadorfinanciero.modelos.divisa.DivisaGuardadoModel;
 import com.blackdeath.planificadorfinanciero.repositorios.DivisasRepository;
 import com.blackdeath.planificadorfinanciero.utilidades.constantes.Mensajes;
 import com.blackdeath.planificadorfinanciero.utilidades.excepciones.db.FilaDuplicadaException;

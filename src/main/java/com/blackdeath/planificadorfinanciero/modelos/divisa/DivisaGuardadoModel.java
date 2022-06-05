@@ -1,4 +1,4 @@
-package com.blackdeath.planificadorfinanciero.modelos;
+package com.blackdeath.planificadorfinanciero.modelos.divisa;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;

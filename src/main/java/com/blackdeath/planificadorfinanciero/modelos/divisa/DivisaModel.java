@@ -1,4 +1,4 @@
-package com.blackdeath.planificadorfinanciero.modelos;
+package com.blackdeath.planificadorfinanciero.modelos.divisa;
 
 import com.blackdeath.planificadorfinanciero.entidades.Divisa;
 
