@@ -38,9 +38,9 @@ public class CuentaModel {
 	private String divisaNombre;
 
 	/**
-	 * Abreviación de la {@link Divisa} de esta cuenta
+	 * Código de la {@link Divisa} de esta cuenta
 	 */
-	private String divisaAbreviacion;
+	private String divisaCodigo;
 
 	/**
 	 * Constructor que inicializa los campos a partir de una {@link Cuenta}
@@ -52,7 +52,7 @@ public class CuentaModel {
 		nombre = cuenta.getNombre();
 		balance = cuenta.getBalance();
 		divisaNombre = cuenta.getDivisa().getNombre();
-		divisaAbreviacion = cuenta.getDivisa().getAbreviacion();
+		divisaCodigo = cuenta.getDivisa().getCodigo();
 	}
 
 }

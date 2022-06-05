@@ -25,9 +25,9 @@ public class DivisaModel {
 	private String nombre;
 
 	/**
-	 * Abreviación de esta divisa
+	 * Código de esta divisa
 	 */
-	private String abreviacion;
+	private String codigo;
 
 	/**
 	 * Constructor que inicializa los campos a partir de una {@link Divisa}
@@ -37,6 +37,6 @@ public class DivisaModel {
 	public DivisaModel(Divisa divisa) {
 		id = divisa.getId();
 		nombre = divisa.getNombre();
-		abreviacion = divisa.getAbreviacion();
+		codigo = divisa.getCodigo();
 	}
 }

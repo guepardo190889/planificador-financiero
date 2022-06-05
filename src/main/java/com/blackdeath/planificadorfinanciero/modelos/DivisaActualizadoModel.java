@@ -9,15 +9,15 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 
 /**
- * Modelo de datos que contiene los datos necesarios para guardar una
+ * Modelo de datos que contiene los datos necesarios para actualizar una
  * {@link Divisa}
  * 
  * @author Seth Karim Luis Martínez
- * @since 22-05-2022
+ * @since 04-06-2022
  *
  */
 @Data
-public class DivisaGuardadoModel {
+public class DivisaActualizadoModel {
 
 	/**
 	 * Nombre de esta divisa
@@ -34,4 +34,5 @@ public class DivisaGuardadoModel {
 	@NotEmpty(message = "Código es requerido")
 	@Size(min = 3, max = 3, message = "Código requiere tres caracteres")
 	private String codigo;
+
 }

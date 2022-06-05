@@ -15,4 +15,11 @@ import com.blackdeath.planificadorfinanciero.entidades.Divisa;
 @Repository
 public interface DivisasRepository extends JpaRepository<Divisa, Long> {
 
+	/**
+	 * Busca y devuelve una {@link Divisa} por su {@code codigo}
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	Divisa findByCodigo(String codigo);
 }

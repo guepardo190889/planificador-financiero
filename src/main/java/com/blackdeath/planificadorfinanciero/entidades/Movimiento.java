@@ -12,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.blackdeath.planificadorfinanciero.enumeradores.TipoMovimiento;
+import com.blackdeath.planificadorfinanciero.utilerias.enumeradores.TipoMovimiento;
 
 import lombok.Data;
 

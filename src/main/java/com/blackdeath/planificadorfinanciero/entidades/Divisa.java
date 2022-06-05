@@ -30,6 +30,11 @@ public class Divisa implements Serializable {
 	private static final long serialVersionUID = -6949771166570269658L;
 
 	/**
+	 * Nombre de esta entidad
+	 */
+	public static final String NOMBRE = "divisa";
+
+	/**
 	 * Identificador único de esta divisa
 	 */
 	@Id
@@ -40,14 +45,14 @@ public class Divisa implements Serializable {
 	/**
 	 * Nombre de esta divisa
 	 */
-	@Column(unique = true, nullable = false, updatable = false, length = 32)
+	@Column(unique = true, nullable = false, updatable = true, length = 32)
 	private String nombre;
 
 	/**
-	 * Abreviación de esta divisa
+	 * Código de esta divisa
 	 */
-	@Column(unique = true, nullable = false, updatable = false, length = 3)
-	private String abreviacion;
+	@Column(unique = true, nullable = false, updatable = true, length = 3)
+	private String codigo;
 
 	/**
 	 * Fecha en que se guardó esta divisa
@@ -63,7 +68,7 @@ public class Divisa implements Serializable {
 	 */
 	public Divisa(DivisaGuardadoModel divisa) {
 		nombre = divisa.getNombre();
-		abreviacion = divisa.getAbreviacion();
+		codigo = divisa.getCodigo();
 		fechaGuardado = new Date();
 	}
 

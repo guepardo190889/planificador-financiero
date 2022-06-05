@@ -1,4 +1,4 @@
-package com.blackdeath.planificadorfinanciero.enumeradores;
+package com.blackdeath.planificadorfinanciero.utilerias.enumeradores;
 
 import lombok.Getter;
 
