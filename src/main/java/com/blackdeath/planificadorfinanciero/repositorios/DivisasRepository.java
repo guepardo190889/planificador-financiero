@@ -1,5 +1,7 @@
 package com.blackdeath.planificadorfinanciero.repositorios;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -26,6 +28,14 @@ public interface DivisasRepository extends JpaRepository<Divisa, Long> {
 	 * @return
 	 */
 	Divisa findByCodigo(String codigo);
+
+	/**
+	 * Busca y devuelve un listado con toda las {@link Divisa} ordenadas por su
+	 * {@code nombre}
+	 * 
+	 * @return
+	 */
+	List<Divisa> findAllByOrderByNombreAsc();
 
 	/**
 	 * Actualiza el {@code porDefecto} a {@code false} de toda las {@link Divisa} a

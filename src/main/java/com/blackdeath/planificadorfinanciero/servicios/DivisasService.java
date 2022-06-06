@@ -89,7 +89,7 @@ public class DivisasService {
 	 * @return
 	 */
 	public List<Divisa> buscarTodos() {
-		return repository.findAll();
+		return repository.findAllByOrderByNombreAsc();
 	}
 
 	/**
