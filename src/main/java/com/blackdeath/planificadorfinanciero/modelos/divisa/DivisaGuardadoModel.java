@@ -1,10 +1,10 @@
 package com.blackdeath.planificadorfinanciero.modelos.divisa;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.blackdeath.planificadorfinanciero.entidades.Divisa;
-import com.sun.istack.NotNull;
 
 import lombok.Data;
 
@@ -22,22 +22,22 @@ public class DivisaGuardadoModel {
 	/**
 	 * Nombre de esta divisa
 	 */
-	@NotNull
-	@NotEmpty(message = "Nombre es requerido")
+	@NotNull(message = "Nombre es requerido")
+	@NotEmpty(message = "Nombre no puede ser vacío")
 	@Size(min = 1, max = 32, message = "Nombre requiere entre uno y treinta y dos caracteres")
 	private String nombre;
 
 	/**
 	 * Código de esta divisa
 	 */
-	@NotNull
-	@NotEmpty(message = "Código es requerido")
+	@NotNull(message = "Código es requerido")
+	@NotEmpty(message = "Código no puede ser vacío")
 	@Size(min = 3, max = 3, message = "Código requiere tres caracteres")
 	private String codigo;
 
 	/**
 	 * Indica si esta divisa es la opción por defecto entre todas
 	 */
-	@NotNull
+	@NotNull(message = "Por defecto es requerido")
 	private Boolean porDefecto;
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,8 +60,17 @@ public class DivisasController {
 	 * @return
 	 */
 	@PostMapping
-	public ResponseEntity<?> guardar(@NotNull @Valid @RequestBody DivisaGuardadoModel divisa) {
+	public ResponseEntity<?> guardar(@NotNull @Valid @RequestBody DivisaGuardadoModel divisa,
+			BindingResult bindingResult) {
 		Map<String, Object> response = new HashMap<>();
+
+		if (bindingResult.hasErrors()) {
+			List<String> errores = bindingResult.getFieldErrors().stream().map(error -> error.getDefaultMessage())
+					.collect(Collectors.toList());
+
+			response.put(LlaveRespuesta.ERROR, errores);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
 
 		try {
 			Divisa divisaGuardada = service.guardar(divisa);
