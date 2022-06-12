@@ -102,8 +102,16 @@ public class DivisasController {
 	 */
 	@PutMapping("/{id}")
 	public ResponseEntity<?> actualizar(@NotNull @PathVariable Long id,
-			@NotNull @Valid @RequestBody DivisaActualizadoModel divisa) {
+			@NotNull @Valid @RequestBody DivisaActualizadoModel divisa, BindingResult bindingResult) {
 		Map<String, Object> response = new HashMap<>();
+
+		if (bindingResult.hasErrors()) {
+			List<String> errores = bindingResult.getFieldErrors().stream().map(error -> error.getDefaultMessage())
+					.collect(Collectors.toList());
+
+			response.put(LlaveRespuesta.ERROR, errores);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
 
 		try {
 			Divisa divisaActualizada = service.actualizar(id, divisa);
