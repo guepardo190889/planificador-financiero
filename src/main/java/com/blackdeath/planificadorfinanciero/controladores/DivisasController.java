@@ -1,6 +1,7 @@
 package com.blackdeath.planificadorfinanciero.controladores;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +70,7 @@ public class DivisasController {
 					.collect(Collectors.toList());
 
 			response.put(LlaveRespuesta.ERROR, errores);
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
 		}
 
 		try {
@@ -88,8 +89,7 @@ public class DivisasController {
 		} catch (FilaDuplicadaException fde) {
 			log.error(fde, fde);
 
-			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_REGISTRO_DUPLICADO);
-			response.put(LlaveRespuesta.ERROR, fde.getMessage());
+			response.put(LlaveRespuesta.ERROR, Arrays.asList(fde.getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
 		}
 	}
@@ -110,7 +110,7 @@ public class DivisasController {
 					.collect(Collectors.toList());
 
 			response.put(LlaveRespuesta.ERROR, errores);
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
 		}
 
 		try {
@@ -129,9 +129,13 @@ public class DivisasController {
 		} catch (FilaNoEncontradaException fnee) {
 			log.error(fnee, fnee);
 
-			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_REGISTRO_NO_ENCONTRADO);
 			response.put(LlaveRespuesta.ERROR, fnee.getMessage());
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		} catch (FilaDuplicadaException fde) {
+			log.error(fde, fde);
+
+			response.put(LlaveRespuesta.ERROR, Arrays.asList(fde.getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
 		}
 	}
 
