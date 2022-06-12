@@ -28,9 +28,9 @@ public class CuentaModel {
 	private String nombre;
 
 	/**
-	 * Balance de esta cuenta
+	 * Saldo de esta cuenta
 	 */
-	private BigDecimal balance;
+	private BigDecimal saldo;
 
 	/**
 	 * Nombre de la {@link Divisa} de esta cuenta
@@ -50,7 +50,7 @@ public class CuentaModel {
 	public CuentaModel(Cuenta cuenta) {
 		id = cuenta.getId();
 		nombre = cuenta.getNombre();
-		balance = cuenta.getBalance();
+		saldo = cuenta.getSaldo();
 		divisaNombre = cuenta.getDivisa().getNombre();
 		divisaCodigo = cuenta.getDivisa().getCodigo();
 	}

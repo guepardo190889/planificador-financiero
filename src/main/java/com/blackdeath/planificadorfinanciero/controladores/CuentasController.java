@@ -3,8 +3,10 @@ package com.blackdeath.planificadorfinanciero.controladores;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,7 +45,7 @@ public class CuentasController {
 	 */
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping
-	public CuentaModel guardar(@Valid @RequestBody CuentaGuardadoModel cuenta) {
+	public ResponseEntity<?> guardar(@NotNull @Valid @RequestBody CuentaGuardadoModel cuenta) {
 		return service.guardar(cuenta);
 	}
 

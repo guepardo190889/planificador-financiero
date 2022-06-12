@@ -24,7 +24,7 @@ public class DivisaGuardadoModel {
 	 */
 	@NotNull(message = "Nombre es requerido")
 	@NotEmpty(message = "Nombre no puede ser vacío")
-	@Size(min = 1, max = 32, message = "Nombre requiere entre uno y treinta y dos caracteres")
+	@Size(min = 1, max = 32, message = "Nombre requiere entre 1 y 32 caracteres")
 	private String nombre;
 
 	/**

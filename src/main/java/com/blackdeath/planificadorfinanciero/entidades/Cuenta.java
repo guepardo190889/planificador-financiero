@@ -49,10 +49,10 @@ public class Cuenta implements Serializable {
 	private String nombre;
 
 	/**
-	 * Balance de esta cuenta
+	 * Saldo de esta cuenta
 	 */
 	@Column(unique = false, nullable = false, updatable = true, precision = 19, scale = 2)
-	private BigDecimal balance;
+	private BigDecimal saldo;
 
 	/**
 	 * Fecha en que se guardó esta cuenta
@@ -75,7 +75,7 @@ public class Cuenta implements Serializable {
 	 */
 	public Cuenta(CuentaGuardadoModel cuenta) {
 		nombre = cuenta.getNombre();
-		balance = cuenta.getBalance();
+		saldo = cuenta.getSaldo();
 		fechaGuardado = new Date();
 		divisa = new Divisa(cuenta.getDivisaId());
 	}
