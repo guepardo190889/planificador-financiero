@@ -17,6 +17,7 @@ public class LlaveRespuesta {
 	public static final String MENSAJE = "mensaje";
 	public static final String RESPUESTA = "respuesta";
 	public static final String ERROR = "error";
+	public static final String ERRORES = "errores";
 
 	public static final String DIVISA_INDIVIDUAL = "divisa";
 	public static final String DIVISA_MULTIPLE = "divisas";

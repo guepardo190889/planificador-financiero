@@ -69,8 +69,8 @@ public class DivisasController {
 			List<String> errores = bindingResult.getFieldErrors().stream().map(error -> error.getDefaultMessage())
 					.collect(Collectors.toList());
 
-			response.put(LlaveRespuesta.ERROR, errores);
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
+			response.put(LlaveRespuesta.ERRORES, errores);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
 
 		try {
@@ -80,16 +80,16 @@ public class DivisasController {
 			response.put(LlaveRespuesta.DIVISA_INDIVIDUAL, new DivisaModel(divisaGuardada));
 
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+
 		} catch (DataAccessException dae) {
 			log.error(dae, dae);
 
-			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_ERROR_GUARDADO);
-			response.put(LlaveRespuesta.ERROR, dae.getMostSpecificCause().getMessage());
+			response.put(LlaveRespuesta.ERROR, Mensajes.GENERICO_ERROR_GUARDADO);
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (FilaDuplicadaException fde) {
 			log.error(fde, fde);
 
-			response.put(LlaveRespuesta.ERROR, Arrays.asList(fde.getMessage()));
+			response.put(LlaveRespuesta.ERRORES, Arrays.asList(fde.getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
 		}
 	}
@@ -109,8 +109,8 @@ public class DivisasController {
 			List<String> errores = bindingResult.getFieldErrors().stream().map(error -> error.getDefaultMessage())
 					.collect(Collectors.toList());
 
-			response.put(LlaveRespuesta.ERROR, errores);
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
+			response.put(LlaveRespuesta.ERRORES, errores);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
 
 		try {
@@ -123,8 +123,7 @@ public class DivisasController {
 		} catch (DataAccessException dae) {
 			log.error(dae, dae);
 
-			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_ERROR_ACTUALIZADO);
-			response.put(LlaveRespuesta.ERROR, dae.getMostSpecificCause().getMessage());
+			response.put(LlaveRespuesta.ERROR, Mensajes.GENERICO_ERROR_ACTUALIZADO);
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (FilaNoEncontradaException fnee) {
 			log.error(fnee, fnee);
@@ -134,7 +133,7 @@ public class DivisasController {
 		} catch (FilaDuplicadaException fde) {
 			log.error(fde, fde);
 
-			response.put(LlaveRespuesta.ERROR, Arrays.asList(fde.getMessage()));
+			response.put(LlaveRespuesta.ERRORES, Arrays.asList(fde.getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
 		}
 	}
@@ -158,14 +157,13 @@ public class DivisasController {
 
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 			} else {
-				response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_REGISTRO_NO_ENCONTRADO);
+				response.put(LlaveRespuesta.ERROR, Mensajes.GENERICO_REGISTRO_NO_ENCONTRADO);
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 			}
 		} catch (DataAccessException dae) {
 			log.error(dae, dae);
 
-			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_ERROR_ELIMINADO);
-			response.put(LlaveRespuesta.ERROR, dae.getMostSpecificCause().getMessage());
+			response.put(LlaveRespuesta.ERROR, Mensajes.GENERICO_ERROR_ELIMINADO);
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -196,8 +194,7 @@ public class DivisasController {
 		} catch (DataAccessException dae) {
 			log.error(dae, dae);
 
-			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_ERROR_CONSULTA);
-			response.put(LlaveRespuesta.ERROR, dae.getMostSpecificCause().getMessage());
+			response.put(LlaveRespuesta.ERROR, Mensajes.GENERICO_ERROR_CONSULTA);
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -217,20 +214,19 @@ public class DivisasController {
 		try {
 			Optional<Divisa> divisaEncontrada = service.buscarPorId(id);
 
-			if (!divisaEncontrada.isPresent()) {
-				response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_REGISTRO_NO_ENCONTRADO);
+			if (divisaEncontrada.isPresent()) {
+				response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_CONSULTA);
+				response.put(LlaveRespuesta.DIVISA_INDIVIDUAL, new DivisaModel(divisaEncontrada.get()));
+
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+			} else {
+				response.put(LlaveRespuesta.ERROR, Mensajes.GENERICO_REGISTRO_NO_ENCONTRADO);
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 			}
-
-			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_CONSULTA);
-			response.put(LlaveRespuesta.DIVISA_INDIVIDUAL, new DivisaModel(divisaEncontrada.get()));
-
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 		} catch (DataAccessException dae) {
 			log.error(dae, dae);
 
-			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_ERROR_CONSULTA);
-			response.put(LlaveRespuesta.ERROR, dae.getMostSpecificCause().getMessage());
+			response.put(LlaveRespuesta.ERROR, Mensajes.GENERICO_ERROR_CONSULTA);
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
