@@ -46,5 +46,5 @@ public interface DivisasRepository extends JpaRepository<Divisa, Long> {
 	@Transactional
 	@Modifying
 	@Query("update Divisa d set d.porDefecto = false where d.id not in (:id)")
-	void actualizarPorDefectoFalsoExcepto(@Param("id") Long id);
+	void hacerPorDefecto(@Param("id") Long id);
 }

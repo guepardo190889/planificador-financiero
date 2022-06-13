@@ -1,4 +1,4 @@
-package com.blackdeath.planificadorfinanciero.modelos;
+package com.blackdeath.planificadorfinanciero.modelos.cuenta;
 
 import java.math.BigDecimal;
 
@@ -39,10 +39,16 @@ public class CuentaGuardadoModel {
 	private BigDecimal saldo;
 
 	/**
+	 * Indica si esta cuenta es la opción por defecto entre todas
+	 */
+	@NotNull(message = "Por defecto es requerido")
+	private Boolean porDefecto;
+
+	/**
 	 * Identificador único de la {@link Divisa} de esta cuenta
 	 */
-	@NotNull
-	@Min(1)
+	@NotNull(message = "Identificador único de divisa es requerido")
+	@Min(value = 1, message = "Identificador único de divisa debe ser positivo")
 	private Long divisaId;
 
 }

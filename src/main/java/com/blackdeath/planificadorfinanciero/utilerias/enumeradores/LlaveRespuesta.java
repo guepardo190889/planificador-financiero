@@ -21,6 +21,8 @@ public class LlaveRespuesta {
 
 	public static final String DIVISA_INDIVIDUAL = "divisa";
 	public static final String DIVISA_MULTIPLE = "divisas";
+	public static final String CUENTA_INDIVIDUAL = "cuenta";
+	public static final String CUENTA_MULTIPLE = "cuentas";
 
 	/**
 	 * Constructor privado para evitar que esta clase sea instanciada

@@ -44,7 +44,7 @@ public class DivisasService {
 		Divisa divisaGuardada = repository.save(new Divisa(divisaGuardadoModel));
 
 		if (divisaGuardada.getPorDefecto()) {
-			repository.actualizarPorDefectoFalsoExcepto(divisaGuardada.getId());
+			repository.hacerPorDefecto(divisaGuardada.getId());
 		}
 
 		return divisaGuardada;
@@ -71,7 +71,7 @@ public class DivisasService {
 				Divisa divisaGuardada = repository.save(divisaEncontrada.get());
 
 				if (divisaGuardada.getPorDefecto()) {
-					repository.actualizarPorDefectoFalsoExcepto(divisaGuardada.getId());
+					repository.hacerPorDefecto(divisaGuardada.getId());
 				}
 
 				return divisaGuardada;
@@ -81,6 +81,22 @@ public class DivisasService {
 		} else {
 			throw new FilaNoEncontradaException(Mensajes.GENERICO_REGISTRO_NO_ENCONTRADO);
 		}
+	}
+
+	/**
+	 * Elimina una {@link Divisa}
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Optional<Divisa> eliminar(Long id) {
+		Optional<Divisa> divisaEncontrada = buscarPorId(id);
+
+		if (divisaEncontrada.isPresent()) {
+			repository.deleteById(id);
+		}
+
+		return divisaEncontrada;
 	}
 
 	/**
@@ -100,22 +116,6 @@ public class DivisasService {
 	 */
 	public Optional<Divisa> buscarPorId(Long id) {
 		return repository.findById(id);
-	}
-
-	/**
-	 * Elimina una {@link Divisa}
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public Optional<Divisa> eliminar(Long id) {
-		Optional<Divisa> divisaEncontrada = buscarPorId(id);
-
-		if (divisaEncontrada.isPresent()) {
-			repository.deleteById(id);
-		}
-
-		return divisaEncontrada;
 	}
 
 }

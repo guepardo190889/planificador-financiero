@@ -14,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.blackdeath.planificadorfinanciero.modelos.CuentaGuardadoModel;
+import com.blackdeath.planificadorfinanciero.modelos.cuenta.CuentaGuardadoModel;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -53,6 +53,12 @@ public class Cuenta implements Serializable {
 	 */
 	@Column(unique = false, nullable = false, updatable = true, precision = 19, scale = 2)
 	private BigDecimal saldo;
+
+	/**
+	 * Indica si esta cuenta es la opción por defecto entre todas
+	 */
+	@Column(name = "por_defecto", unique = false, nullable = false, updatable = true, columnDefinition = "boolean default false")
+	private Boolean porDefecto;
 
 	/**
 	 * Fecha en que se guardó esta cuenta

@@ -1,14 +1,20 @@
 package com.blackdeath.planificadorfinanciero.servicios;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Service;
 
 import com.blackdeath.planificadorfinanciero.entidades.Cuenta;
-import com.blackdeath.planificadorfinanciero.modelos.CuentaGuardadoModel;
-import com.blackdeath.planificadorfinanciero.modelos.CuentaModel;
+import com.blackdeath.planificadorfinanciero.modelos.cuenta.CuentaActualizadoModel;
+import com.blackdeath.planificadorfinanciero.modelos.cuenta.CuentaGuardadoModel;
 import com.blackdeath.planificadorfinanciero.repositorios.CuentasRepository;
+import com.blackdeath.planificadorfinanciero.utilidades.constantes.Mensajes;
+import com.blackdeath.planificadorfinanciero.utilidades.excepciones.db.FilaDuplicadaException;
+import com.blackdeath.planificadorfinanciero.utilidades.excepciones.db.FilaNoEncontradaException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,10 +37,69 @@ public class CuentasService {
 	 * @param cuentaGuardadoModel
 	 * @return
 	 */
-	public CuentaModel guardar(CuentaGuardadoModel cuentaGuardadoModel) {
-		Cuenta cuenta = repository.save(new Cuenta(cuentaGuardadoModel));
+	public Cuenta guardar(CuentaGuardadoModel cuentaGuardadoModel) {
+		Cuenta cuentaEncontrada = repository.findByNombre(cuentaGuardadoModel.getNombre());
 
-		return new CuentaModel(cuenta);
+		if (cuentaEncontrada != null) {
+			throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
+		}
+
+		Cuenta cuentaGuardada = repository.save(new Cuenta(cuentaGuardadoModel));
+
+		if (cuentaGuardada.getPorDefecto()) {
+			repository.hacerPorDefecto(cuentaGuardada.getId());
+		}
+
+		return cuentaGuardada;
+	}
+
+	/**
+	 * Actualiza una {@link Cuenta} existente;
+	 * 
+	 * @param id
+	 * @param cuenta
+	 * @return
+	 */
+	public Cuenta actualizar(@NotNull Long id, @NotNull @Valid CuentaActualizadoModel cuenta) {
+		Optional<Cuenta> cuentaEncontrada = buscarPorId(id);
+
+		if (cuentaEncontrada.isPresent()) {
+			Cuenta cuentaConNombreCoincidente = repository.findByNombre(cuenta.getNombre());
+
+			if (cuentaConNombreCoincidente == null) {
+				cuentaEncontrada.get().setNombre(cuenta.getNombre());
+				cuentaEncontrada.get().setSaldo(cuenta.getSaldo());
+				cuentaEncontrada.get().setPorDefecto(cuenta.getPorDefecto());
+
+				Cuenta cuentaGuardada = repository.save(cuentaEncontrada.get());
+
+				if (cuentaGuardada.getPorDefecto()) {
+					repository.hacerPorDefecto(cuentaGuardada.getId());
+				}
+
+				return cuentaGuardada;
+			} else {
+				throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
+			}
+		} else {
+			throw new FilaNoEncontradaException(Mensajes.GENERICO_REGISTRO_NO_ENCONTRADO);
+		}
+	}
+
+	/**
+	 * Elimina una {@link Cuenta}
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Optional<Cuenta> eliminar(Long id) {
+		Optional<Cuenta> cuentaEncontrada = buscarPorId(id);
+
+		if (cuentaEncontrada.isPresent()) {
+			repository.deleteById(id);
+		}
+
+		return cuentaEncontrada;
 	}
 
 	/**
@@ -42,16 +107,18 @@ public class CuentasService {
 	 * 
 	 * @return
 	 */
-	public List<CuentaModel> buscar() {
-		List<Cuenta> cuentas = repository.findAll();
+	public List<Cuenta> buscarTodos() {
+		return repository.findAllByOrderByNombreAsc();
+	}
 
-		List<CuentaModel> modelos = new ArrayList<>();
-
-		for (Cuenta cuenta : cuentas) {
-			modelos.add(new CuentaModel(cuenta));
-		}
-
-		return modelos;
+	/**
+	 * Busca y devuelve una divisa por su identificador único
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Optional<Cuenta> buscarPorId(@NotNull Long id) {
+		return repository.findById(id);
 	}
 
 }

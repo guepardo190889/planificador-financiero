@@ -1,4 +1,4 @@
-package com.blackdeath.planificadorfinanciero.modelos;
+package com.blackdeath.planificadorfinanciero.modelos.cuenta;
 
 import java.math.BigDecimal;
 
@@ -33,6 +33,11 @@ public class CuentaModel {
 	private BigDecimal saldo;
 
 	/**
+	 * Indica si esta cuenta es la opción por defecto entre todas
+	 */
+	private Boolean porDefecto;
+
+	/**
 	 * Nombre de la {@link Divisa} de esta cuenta
 	 */
 	private String divisaNombre;
@@ -51,6 +56,7 @@ public class CuentaModel {
 		id = cuenta.getId();
 		nombre = cuenta.getNombre();
 		saldo = cuenta.getSaldo();
+		porDefecto = cuenta.getPorDefecto();
 		divisaNombre = cuenta.getDivisa().getNombre();
 		divisaCodigo = cuenta.getDivisa().getCodigo();
 	}
