@@ -8,7 +8,7 @@ import com.blackdeath.planificadorfinanciero.entidades.Divisa;
 import lombok.Data;
 
 /**
- * Modelo de datos que representa una {@link Cuenta}
+ * Modelo que representa una {@link Cuenta}
  * 
  * @author Seth Karim Luis Martínez
  * @since 22-05-2022

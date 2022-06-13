@@ -13,8 +13,7 @@ import com.blackdeath.planificadorfinanciero.entidades.Divisa;
 import lombok.Data;
 
 /**
- * Modelo de datos que contiene los datos necesarios para guardar una
- * {@link Cuenta}
+ * Modelo que contiene los datos necesarios para guardar una {@link Cuenta}
  * 
  * @author Seth Karim Luis Martínez
  * @since 24-05-2022

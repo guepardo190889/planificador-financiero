@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.blackdeath.planificadorfinanciero.repositorios;
 
 import java.util.List;

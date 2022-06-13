@@ -74,8 +74,8 @@ public class Cuenta implements Serializable {
 	private Divisa divisa;
 
 	/**
-	 * Constructor que inicializa los campos necesarios para guardar esta cuenta des
-	 * de una {@link CuentaGuardadoModel}
+	 * Constructor que inicializa los campos necesarios para guardar esta cuenta
+	 * desde una {@link CuentaGuardadoModel}
 	 * 
 	 * @param cuenta
 	 */

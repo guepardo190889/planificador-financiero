@@ -54,7 +54,7 @@ public class CuentasService {
 	}
 
 	/**
-	 * Actualiza una {@link Cuenta} existente;
+	 * Actualiza una {@link Cuenta} existente
 	 * 
 	 * @param id
 	 * @param cuenta
@@ -112,12 +112,12 @@ public class CuentasService {
 	}
 
 	/**
-	 * Busca y devuelve una divisa por su identificador único
+	 * Busca y devuelve una {@link Cuenta} por su identificador único
 	 * 
 	 * @param id
 	 * @return
 	 */
-	public Optional<Cuenta> buscarPorId(@NotNull Long id) {
+	public Optional<Cuenta> buscarPorId(Long id) {
 		return repository.findById(id);
 	}
 
