@@ -1,5 +1,6 @@
 package com.blackdeath.planificadorfinanciero.servicios;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -33,7 +34,7 @@ public class EntidadesFinancierasService {
 	/**
 	 * Guarda una nueva {@link EntidadFinanciera}
 	 * 
-	 * @param cuentaGuardadoModel
+	 * @param entidadFinancieraGuardadoModel
 	 * @return
 	 */
 	public EntidadFinanciera guardar(EntidadFinancieraGuardadoModel entidadFinancieraGuardadoModel) {
@@ -77,6 +78,31 @@ public class EntidadesFinancierasService {
 	}
 
 	/**
+	 * Elimina una {@link EntidadFinanciera}
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Optional<EntidadFinanciera> eliminar(@NotNull Long id) {
+		Optional<EntidadFinanciera> entidadFinancieraEncontrada = buscarPorId(id);
+
+		if (entidadFinancieraEncontrada.isPresent()) {
+			repository.deleteById(id);
+		}
+
+		return entidadFinancieraEncontrada;
+	}
+
+	/**
+	 * Busca y devuelve un listado de todas las {@link EntidadFinanciera}
+	 * 
+	 * @return
+	 */
+	public List<EntidadFinanciera> buscarTodos() {
+		return repository.findAllByOrderByNombreAsc();
+	}
+
+	/**
 	 * Busca y devuelve una {@link EntidadFinanciera} por su identificador único
 	 * 
 	 * @param id
@@ -85,4 +111,5 @@ public class EntidadesFinancierasService {
 	public Optional<EntidadFinanciera> buscarPorId(Long id) {
 		return repository.findById(id);
 	}
+
 }

@@ -25,9 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.blackdeath.planificadorfinanciero.entidades.Cuenta;
 import com.blackdeath.planificadorfinanciero.entidades.EntidadFinanciera;
-import com.blackdeath.planificadorfinanciero.modelos.cuenta.CuentaModel;
 import com.blackdeath.planificadorfinanciero.modelos.entidadfinanciera.EntidadFinancieraActualizadoModel;
 import com.blackdeath.planificadorfinanciero.modelos.entidadfinanciera.EntidadFinancieraGuardadoModel;
 import com.blackdeath.planificadorfinanciero.modelos.entidadfinanciera.EntidadFinancieraModel;
@@ -142,7 +140,7 @@ public class EntidadesFinancierasController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
 		}
 	}
-	
+
 	/**
 	 * Elimina una {@link EntidadFinanciera}
 	 * 
@@ -154,11 +152,12 @@ public class EntidadesFinancierasController {
 		Map<String, Object> response = new HashMap<>();
 
 		try {
-			Optional<Cuenta> cuentaEliminada = service.eliminar(id);
+			Optional<EntidadFinanciera> entidadFinancieraEliminada = service.eliminar(id);
 
-			if (cuentaEliminada.isPresent()) {
+			if (entidadFinancieraEliminada.isPresent()) {
 				response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_ELIMINADO);
-				response.put(LlaveRespuesta.CUENTA_INDIVIDUAL, new CuentaModel(cuentaEliminada.get()));
+				response.put(LlaveRespuesta.ENTIDAD_FINANCIERA_INDIVIDUAL,
+						new EntidadFinancieraModel(entidadFinancieraEliminada.get()));
 
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 			} else {
@@ -174,7 +173,7 @@ public class EntidadesFinancierasController {
 	}
 
 	/**
-	 * Busca y devuelve un listado de todas las {@link Cuenta} guardadas
+	 * Busca y devuelve un listado de todas las {@link EntidadFinanciera} guardadas
 	 * 
 	 * @return
 	 */
@@ -183,16 +182,16 @@ public class EntidadesFinancierasController {
 		Map<String, Object> response = new HashMap<>();
 
 		try {
-			List<Cuenta> cuentasEncontradas = service.buscarTodos();
+			List<EntidadFinanciera> entidadesFinancierasEncontradas = service.buscarTodos();
 
-			List<CuentaModel> modelos = new ArrayList<>();
+			List<EntidadFinancieraModel> modelos = new ArrayList<>();
 
-			for (Cuenta cuentaEncontrada : cuentasEncontradas) {
-				modelos.add(new CuentaModel(cuentaEncontrada));
+			for (EntidadFinanciera entidadFinancieraEncontrada : entidadesFinancierasEncontradas) {
+				modelos.add(new EntidadFinancieraModel(entidadFinancieraEncontrada));
 			}
 
 			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_CONSULTA);
-			response.put(LlaveRespuesta.CUENTA_MULTIPLE, modelos);
+			response.put(LlaveRespuesta.ENTIDAD_FINANCIERA_MULTIPLE, modelos);
 
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 
@@ -205,7 +204,7 @@ public class EntidadesFinancierasController {
 	}
 
 	/**
-	 * Busca una {@link Cuenta} por su id.
+	 * Busca una {@link EntidadFinanciera} por su id.
 	 * <p>
 	 * En caso que no se encuentre se devuelve un {@link HttpStatus#NOT_FOUND}
 	 * 
@@ -217,11 +216,12 @@ public class EntidadesFinancierasController {
 		Map<String, Object> response = new HashMap<>();
 
 		try {
-			Optional<Cuenta> cuentaEncontrada = service.buscarPorId(id);
+			Optional<EntidadFinanciera> entidadFinancieraEncontrada = service.buscarPorId(id);
 
-			if (cuentaEncontrada.isPresent()) {
+			if (entidadFinancieraEncontrada.isPresent()) {
 				response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_CONSULTA);
-				response.put(LlaveRespuesta.CUENTA_INDIVIDUAL, new CuentaModel(cuentaEncontrada.get()));
+				response.put(LlaveRespuesta.ENTIDAD_FINANCIERA_INDIVIDUAL,
+						new EntidadFinancieraModel(entidadFinancieraEncontrada.get()));
 
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 			} else {

@@ -103,7 +103,7 @@ public class CuentasService {
 	}
 
 	/**
-	 * Busca y devuelve un listado de todas las cuentas
+	 * Busca y devuelve un listado de todas las {@link Cuenta}
 	 * 
 	 * @return
 	 */
