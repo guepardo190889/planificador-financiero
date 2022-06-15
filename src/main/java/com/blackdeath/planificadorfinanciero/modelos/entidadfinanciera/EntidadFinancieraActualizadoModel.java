@@ -41,4 +41,17 @@ public class EntidadFinancieraActualizadoModel {
 	 * {@link TipoEntidad} que clasifica a esta entidad financiera
 	 */
 	private TipoEntidad tipo;
+
+	/**
+	 * Verifica si el {@code nombre} que se va a actualizar para esta entidad
+	 * financiera es diferente al nombre actual. Si los nombres son iguales se
+	 * devuelve {@code false}, de lo contrario {@code true}
+	 * <p>
+	 * 
+	 * @param nombreActual
+	 * @return {@code true} si el nombre es nuevo, de lo contrario {@code false}
+	 */
+	public boolean isNombreNuevo(String nombreActual) {
+		return !nombre.equals(nombreActual);
+	}
 }

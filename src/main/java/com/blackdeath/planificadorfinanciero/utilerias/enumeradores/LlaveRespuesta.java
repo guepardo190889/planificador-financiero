@@ -23,8 +23,6 @@ public class LlaveRespuesta {
 	public static final String DIVISA_MULTIPLE = "divisas";
 	public static final String CUENTA_INDIVIDUAL = "cuenta";
 	public static final String CUENTA_MULTIPLE = "cuentas";
-	public static final String ENTIDAD_FINANCIERA_INDIVIDUAL = "entidadFinanciera";
-	public static final String ENTIDAD_FINANCIERA_MULTIPLE = "entidadesFinancieras";
 
 	/**
 	 * Constructor privado para evitar que esta clase sea instanciada

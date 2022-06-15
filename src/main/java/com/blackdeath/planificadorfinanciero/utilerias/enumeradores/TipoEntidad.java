@@ -20,7 +20,8 @@ public enum TipoEntidad {
 
 	CASA_BOLSA("Casa de Bolsa"), SOCIEDAD_FINANCIERA_POPULAR("Sociedad Financiera Popular (SOFIPO)"),
 	INSTITUCION_BANCA_MULTIPLE("Institución de Banca Múltiple (banco)"),
-	ADMINISTRADORA_FONDOS_RETIRO("Administradora de Fondos para el Retiro (AFORE)");
+	ADMINISTRADORA_FONDOS_RETIRO("Administradora de Fondos para el Retiro (AFORE)"),
+	INSTITUCION_TECNOLOGIA_FINANCIERA("Institución de Tcnología Financiera (Fintech)");
 
 	private String descripcion;
 

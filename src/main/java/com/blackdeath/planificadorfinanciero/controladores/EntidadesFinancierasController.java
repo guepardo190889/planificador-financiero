@@ -76,12 +76,8 @@ public class EntidadesFinancierasController {
 		try {
 			EntidadFinanciera entidadFinancieraGuardada = service.guardar(entidadFinanciera);
 
-			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_GUARDADO);
-			response.put(LlaveRespuesta.ENTIDAD_FINANCIERA_INDIVIDUAL,
-					new EntidadFinancieraModel(entidadFinancieraGuardada));
-
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
-
+			return new ResponseEntity<EntidadFinancieraModel>(new EntidadFinancieraModel(entidadFinancieraGuardada),
+					HttpStatus.CREATED);
 		} catch (DataAccessException dae) {
 			log.error(dae, dae);
 
@@ -118,11 +114,8 @@ public class EntidadesFinancierasController {
 		try {
 			EntidadFinanciera entidadFinancieraActualizada = service.actualizar(id, entidadFinanciera);
 
-			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_ACTUALIZADO);
-			response.put(LlaveRespuesta.ENTIDAD_FINANCIERA_INDIVIDUAL,
-					new EntidadFinancieraModel(entidadFinancieraActualizada));
-
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+			return new ResponseEntity<EntidadFinancieraModel>(new EntidadFinancieraModel(entidadFinancieraActualizada),
+					HttpStatus.OK);
 		} catch (DataAccessException dae) {
 			log.error(dae, dae);
 
@@ -155,11 +148,8 @@ public class EntidadesFinancierasController {
 			Optional<EntidadFinanciera> entidadFinancieraEliminada = service.eliminar(id);
 
 			if (entidadFinancieraEliminada.isPresent()) {
-				response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_ELIMINADO);
-				response.put(LlaveRespuesta.ENTIDAD_FINANCIERA_INDIVIDUAL,
-						new EntidadFinancieraModel(entidadFinancieraEliminada.get()));
-
-				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+				return new ResponseEntity<EntidadFinancieraModel>(
+						new EntidadFinancieraModel(entidadFinancieraEliminada.get()), HttpStatus.OK);
 			} else {
 				response.put(LlaveRespuesta.ERROR, Mensajes.GENERICO_REGISTRO_NO_ENCONTRADO);
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
@@ -179,8 +169,6 @@ public class EntidadesFinancierasController {
 	 */
 	@GetMapping
 	public ResponseEntity<?> buscarTodos() {
-		Map<String, Object> response = new HashMap<>();
-
 		try {
 			List<EntidadFinanciera> entidadesFinancierasEncontradas = service.buscarTodos();
 
@@ -190,13 +178,11 @@ public class EntidadesFinancierasController {
 				modelos.add(new EntidadFinancieraModel(entidadFinancieraEncontrada));
 			}
 
-			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_CONSULTA);
-			response.put(LlaveRespuesta.ENTIDAD_FINANCIERA_MULTIPLE, modelos);
-
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
-
+			return new ResponseEntity<List<EntidadFinancieraModel>>(modelos, HttpStatus.OK);
 		} catch (DataAccessException dae) {
 			log.error(dae, dae);
+
+			Map<String, Object> response = new HashMap<>();
 
 			response.put(LlaveRespuesta.ERROR, Mensajes.GENERICO_ERROR_CONSULTA);
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -219,11 +205,8 @@ public class EntidadesFinancierasController {
 			Optional<EntidadFinanciera> entidadFinancieraEncontrada = service.buscarPorId(id);
 
 			if (entidadFinancieraEncontrada.isPresent()) {
-				response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_CONSULTA);
-				response.put(LlaveRespuesta.ENTIDAD_FINANCIERA_INDIVIDUAL,
-						new EntidadFinancieraModel(entidadFinancieraEncontrada.get()));
-
-				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+				return new ResponseEntity<EntidadFinancieraModel>(
+						new EntidadFinancieraModel(entidadFinancieraEncontrada.get()), HttpStatus.OK);
 			} else {
 				response.put(LlaveRespuesta.ERROR, Mensajes.GENERICO_REGISTRO_NO_ENCONTRADO);
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);

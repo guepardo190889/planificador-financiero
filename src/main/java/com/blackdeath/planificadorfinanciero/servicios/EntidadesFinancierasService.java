@@ -52,26 +52,28 @@ public class EntidadesFinancierasService {
 	 * Actualiza una {@link EntidadFinanciera} existente
 	 * 
 	 * @param id
-	 * @param entidadFinanciera
+	 * @param entidadFinancieraActualizadoModel
 	 * @return
 	 */
 	public EntidadFinanciera actualizar(@NotNull Long id,
-			@NotNull @Valid EntidadFinancieraActualizadoModel entidadFinanciera) {
+			@NotNull @Valid EntidadFinancieraActualizadoModel entidadFinancieraActualizadoModel) {
 		Optional<EntidadFinanciera> entidadFinancieraEncontrada = buscarPorId(id);
 
 		if (entidadFinancieraEncontrada.isPresent()) {
-			EntidadFinanciera entidadFinancieraConNombreCoincidente = repository
-					.findByNombre(entidadFinanciera.getNombre());
+			if (entidadFinancieraActualizadoModel.isNombreNuevo(entidadFinancieraEncontrada.get().getNombre())) {
+				EntidadFinanciera entidadFinancieraConNombreCoincidente = repository
+						.findByNombre(entidadFinancieraActualizadoModel.getNombre());
 
-			if (entidadFinancieraConNombreCoincidente == null) {
-				entidadFinancieraEncontrada.get().setNombre(entidadFinanciera.getNombre());
-				entidadFinancieraEncontrada.get().setDescripcion(entidadFinanciera.getDescripcion());
-				entidadFinancieraEncontrada.get().setTipo(entidadFinanciera.getTipo());
-
-				return repository.save(entidadFinancieraEncontrada.get());
-			} else {
-				throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
+				if (entidadFinancieraConNombreCoincidente != null) {
+					throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
+				}
 			}
+
+			entidadFinancieraEncontrada.get().setNombre(entidadFinancieraActualizadoModel.getNombre());
+			entidadFinancieraEncontrada.get().setDescripcion(entidadFinancieraActualizadoModel.getDescripcion());
+			entidadFinancieraEncontrada.get().setTipo(entidadFinancieraActualizadoModel.getTipo());
+
+			return repository.save(entidadFinancieraEncontrada.get());
 		} else {
 			throw new FilaNoEncontradaException(Mensajes.GENERICO_REGISTRO_NO_ENCONTRADO);
 		}
