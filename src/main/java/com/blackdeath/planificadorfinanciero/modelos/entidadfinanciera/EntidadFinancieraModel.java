@@ -4,6 +4,7 @@
 package com.blackdeath.planificadorfinanciero.modelos.entidadfinanciera;
 
 import com.blackdeath.planificadorfinanciero.entidades.EntidadFinanciera;
+import com.blackdeath.planificadorfinanciero.modelos.tipoentidadfinanciera.TipoEntidadFinancieraModel;
 import com.blackdeath.planificadorfinanciero.utilerias.enumeradores.TipoEntidadFinanciera;
 
 import lombok.Data;
@@ -34,9 +35,10 @@ public class EntidadFinancieraModel {
 	private String descripcion;
 
 	/**
-	 * {@link TipoEntidadFinanciera} que clasifica a esta entidad financiera
+	 * Representación del {@link TipoEntidadFinanciera} que clasifica a esta entidad
+	 * financiera
 	 */
-	private TipoEntidadFinanciera tipo;
+	private TipoEntidadFinancieraModel tipo;
 
 	/**
 	 * Constructor que inicializa los campos a partir de una
@@ -48,7 +50,7 @@ public class EntidadFinancieraModel {
 		id = entidadFinanciera.getId();
 		nombre = entidadFinanciera.getNombre();
 		descripcion = entidadFinanciera.getDescripcion();
-		tipo = entidadFinanciera.getTipo();
+		tipo = new TipoEntidadFinancieraModel(entidadFinanciera.getTipo());
 	}
 
 }

@@ -1,8 +1,5 @@
 package com.blackdeath.planificadorfinanciero.utilerias.enumeradores;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.blackdeath.planificadorfinanciero.entidades.EntidadFinanciera;
 
 import lombok.Getter;
@@ -32,20 +29,5 @@ public enum TipoEntidadFinanciera {
 
 	private TipoEntidadFinanciera(String descripcion) {
 		this.descripcion = descripcion;
-	}
-
-	/**
-	 * Devuelve una lista con las descripciones de todos los tipos de entidades
-	 * financieras
-	 * 
-	 * @return
-	 */
-	public static List<String> elementos() {
-		List<String> tipos = new ArrayList<>();
-		for (TipoEntidadFinanciera tipo : values()) {
-			tipos.add(tipo.getDescripcion());
-		}
-
-		return tipos;
 	}
 }
