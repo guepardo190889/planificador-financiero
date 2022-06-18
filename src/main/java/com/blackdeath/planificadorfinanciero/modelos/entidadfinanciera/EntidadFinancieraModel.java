@@ -4,7 +4,7 @@
 package com.blackdeath.planificadorfinanciero.modelos.entidadfinanciera;
 
 import com.blackdeath.planificadorfinanciero.entidades.EntidadFinanciera;
-import com.blackdeath.planificadorfinanciero.utilerias.enumeradores.TipoEntidad;
+import com.blackdeath.planificadorfinanciero.utilerias.enumeradores.TipoEntidadFinanciera;
 
 import lombok.Data;
 
@@ -34,9 +34,9 @@ public class EntidadFinancieraModel {
 	private String descripcion;
 
 	/**
-	 * {@link TipoEntidad} que clasifica a esta entidad financiera
+	 * {@link TipoEntidadFinanciera} que clasifica a esta entidad financiera
 	 */
-	private TipoEntidad tipo;
+	private TipoEntidadFinanciera tipo;
 
 	/**
 	 * Constructor que inicializa los campos a partir de una

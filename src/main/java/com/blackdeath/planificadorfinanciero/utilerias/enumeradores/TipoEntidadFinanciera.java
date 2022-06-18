@@ -1,5 +1,8 @@
 package com.blackdeath.planificadorfinanciero.utilerias.enumeradores;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.blackdeath.planificadorfinanciero.entidades.EntidadFinanciera;
 
 import lombok.Getter;
@@ -16,16 +19,33 @@ import lombok.Getter;
  *
  */
 @Getter
-public enum TipoEntidad {
-
+public enum TipoEntidadFinanciera {
 	CASA_BOLSA("Casa de Bolsa"), SOCIEDAD_FINANCIERA_POPULAR("Sociedad Financiera Popular (SOFIPO)"),
 	INSTITUCION_BANCA_MULTIPLE("Institución de Banca Múltiple (banco)"),
 	ADMINISTRADORA_FONDOS_RETIRO("Administradora de Fondos para el Retiro (AFORE)"),
-	INSTITUCION_TECNOLOGIA_FINANCIERA("Institución de Tcnología Financiera (Fintech)");
+	INSTITUCION_TECNOLOGIA_FINANCIERA("Institución de Tecnología Financiera (Fintech)");
 
+	/**
+	 * Descripción de este tipo de entidad financiera
+	 */
 	private String descripcion;
 
-	private TipoEntidad(String descripcion) {
+	private TipoEntidadFinanciera(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	/**
+	 * Devuelve una lista con las descripciones de todos los tipos de entidades
+	 * financieras
+	 * 
+	 * @return
+	 */
+	public static List<String> elementos() {
+		List<String> tipos = new ArrayList<>();
+		for (TipoEntidadFinanciera tipo : values()) {
+			tipos.add(tipo.getDescripcion());
+		}
+
+		return tipos;
 	}
 }

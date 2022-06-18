@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.blackdeath.planificadorfinanciero.modelos.entidadfinanciera.EntidadFinancieraGuardadoModel;
-import com.blackdeath.planificadorfinanciero.utilerias.enumeradores.TipoEntidad;
+import com.blackdeath.planificadorfinanciero.utilerias.enumeradores.TipoEntidadFinanciera;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -54,11 +54,11 @@ public class EntidadFinanciera implements Serializable {
 	private String descripcion;
 
 	/**
-	 * {@link TipoEntidad} que clasifica a esta entidad financiera
+	 * {@link TipoEntidadFinanciera} que clasifica a esta entidad financiera
 	 */
 	@Enumerated(EnumType.STRING)
 	@Column(unique = false, nullable = true, updatable = true, length = 64)
-	private TipoEntidad tipo;
+	private TipoEntidadFinanciera tipo;
 
 	/**
 	 * Fecha en que se guardó esta cuenta

@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.blackdeath.planificadorfinanciero.entidades.EntidadFinanciera;
-import com.blackdeath.planificadorfinanciero.utilerias.enumeradores.TipoEntidad;
+import com.blackdeath.planificadorfinanciero.utilerias.enumeradores.TipoEntidadFinanciera;
 
 import lombok.Data;
 
@@ -35,8 +35,8 @@ public class EntidadFinancieraGuardadoModel {
 	private String descripcion;
 
 	/**
-	 * {@link TipoEntidad} que clasifica a esta entidad financiera
+	 * {@link TipoEntidadFinanciera} que clasifica a esta entidad financiera
 	 */
-	private TipoEntidad tipo;
+	private TipoEntidadFinanciera tipo;
 
 }
