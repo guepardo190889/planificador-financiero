@@ -1,5 +1,6 @@
 package com.blackdeath.planificadorfinanciero.controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.blackdeath.planificadorfinanciero.modelos.tipoentidadfinanciera.TipoEntidadFinancieraModel;
 import com.blackdeath.planificadorfinanciero.utilerias.enumeradores.TipoEntidadFinanciera;
 
 /**
@@ -30,6 +32,12 @@ public class TiposEntidadesFinancierasController {
 	 */
 	@GetMapping
 	public ResponseEntity<?> buscarTodos() {
-		return new ResponseEntity<List<String>>(TipoEntidadFinanciera.elementos(), HttpStatus.OK);
+		List<TipoEntidadFinancieraModel> tiposEntidadesFinancieras = new ArrayList<>();
+
+		for (TipoEntidadFinanciera tipoEntidadFinanciera : TipoEntidadFinanciera.values()) {
+			tiposEntidadesFinancieras.add(new TipoEntidadFinancieraModel(tipoEntidadFinanciera));
+		}
+
+		return new ResponseEntity<List<TipoEntidadFinancieraModel>>(tiposEntidadesFinancieras, HttpStatus.OK);
 	}
 }

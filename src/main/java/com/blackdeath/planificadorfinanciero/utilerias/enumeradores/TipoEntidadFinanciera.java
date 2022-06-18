@@ -21,7 +21,7 @@ import lombok.Getter;
 @Getter
 public enum TipoEntidadFinanciera {
 	CASA_BOLSA("Casa de Bolsa"), SOCIEDAD_FINANCIERA_POPULAR("Sociedad Financiera Popular (SOFIPO)"),
-	INSTITUCION_BANCA_MULTIPLE("Institución de Banca Múltiple (banco)"),
+	INSTITUCION_BANCA_MULTIPLE("Institución de Banca Múltiple (Banco)"),
 	ADMINISTRADORA_FONDOS_RETIRO("Administradora de Fondos para el Retiro (AFORE)"),
 	INSTITUCION_TECNOLOGIA_FINANCIERA("Institución de Tecnología Financiera (Fintech)");
 
