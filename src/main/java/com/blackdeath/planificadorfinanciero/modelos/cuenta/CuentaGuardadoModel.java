@@ -2,6 +2,7 @@ package com.blackdeath.planificadorfinanciero.modelos.cuenta;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -9,6 +10,8 @@ import javax.validation.constraints.Size;
 
 import com.blackdeath.planificadorfinanciero.entidades.Cuenta;
 import com.blackdeath.planificadorfinanciero.entidades.Divisa;
+import com.blackdeath.planificadorfinanciero.entidades.EntidadFinanciera;
+import com.blackdeath.planificadorfinanciero.utilidades.constantes.Constantes;
 
 import lombok.Data;
 
@@ -34,7 +37,8 @@ public class CuentaGuardadoModel {
 	 * Saldo de esta cuenta
 	 */
 	@NotNull(message = "Saldo es requerido")
-	@Min(value = 0, message = "El saldo debe ser positivo")
+	@Min(value = Constantes.MINIMO_SALDO, message = "El saldo debe ser mayor o igual a -999,999,999,999")
+	@Max(value = Constantes.MAXIMO_SALDO, message = "El saldo debe ser menor o igual a 999,999,999,999")
 	private BigDecimal saldo;
 
 	/**
@@ -49,5 +53,11 @@ public class CuentaGuardadoModel {
 	@NotNull(message = "Identificador único de divisa es requerido")
 	@Min(value = 1, message = "Identificador único de divisa debe ser positivo")
 	private Long divisaId;
+
+	/**
+	 * Identificador único de la {@link EntidadFinanciera de esta cuenta}
+	 */
+	@Min(value = 1, message = "Identificador único de entidad financiera debe ser positivo")
+	private Long entidadFinancieraId;
 
 }

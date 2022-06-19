@@ -20,7 +20,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Cuenta, monedero o lugar en donde se guarda dinero
+ * Cuenta o depósito donde se guarda dinero
  * 
  * @author Seth Karim Luis Martínez
  * @since 22-05-2022
@@ -51,7 +51,7 @@ public class Cuenta implements Serializable {
 	/**
 	 * Saldo de esta cuenta
 	 */
-	@Column(unique = false, nullable = false, updatable = true, precision = 19, scale = 2)
+	@Column(unique = false, nullable = false, updatable = true, precision = 14, scale = 2)
 	private BigDecimal saldo;
 
 	/**
@@ -67,11 +67,18 @@ public class Cuenta implements Serializable {
 	private Date fechaGuardado;
 
 	/**
-	 * {@link Divisa de esta cuenta}
+	 * {@link Divisa} de esta cuenta
 	 */
 	@JoinColumn(name = "id_divisa")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Divisa divisa;
+
+	/**
+	 * {@link EntidadFinanciera} de esta cuenta
+	 */
+	@JoinColumn(name = "id_entidad_financiera")
+	@ManyToOne(fetch = FetchType.LAZY)
+	private EntidadFinanciera entidadFinanciera;
 
 	/**
 	 * Constructor que inicializa los campos necesarios para guardar esta cuenta
@@ -82,8 +89,13 @@ public class Cuenta implements Serializable {
 	public Cuenta(CuentaGuardadoModel cuenta) {
 		nombre = cuenta.getNombre();
 		saldo = cuenta.getSaldo();
+		porDefecto = cuenta.getPorDefecto();
 		fechaGuardado = new Date();
 		divisa = new Divisa(cuenta.getDivisaId());
+
+		if (cuenta.getEntidadFinancieraId() != null) {
+			entidadFinanciera = new EntidadFinanciera(cuenta.getEntidadFinancieraId());
+		}
 	}
 
 }

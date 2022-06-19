@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 
 import com.blackdeath.planificadorfinanciero.entidades.Cuenta;
 import com.blackdeath.planificadorfinanciero.entidades.Divisa;
+import com.blackdeath.planificadorfinanciero.entidades.EntidadFinanciera;
+import com.blackdeath.planificadorfinanciero.modelos.divisa.DivisaModel;
+import com.blackdeath.planificadorfinanciero.modelos.entidadfinanciera.EntidadFinancieraModel;
 
 import lombok.Data;
 
@@ -38,14 +41,14 @@ public class CuentaModel {
 	private Boolean porDefecto;
 
 	/**
-	 * Nombre de la {@link Divisa} de esta cuenta
+	 * Representación de la {@link Divisa} de esta cuenta
 	 */
-	private String divisaNombre;
+	private DivisaModel divisa;
 
 	/**
-	 * Código de la {@link Divisa} de esta cuenta
+	 * Representación de la {@link EntidadFinanciera} de esta cuenta
 	 */
-	private String divisaCodigo;
+	private EntidadFinancieraModel entidadFinanciera;
 
 	/**
 	 * Constructor que inicializa los campos a partir de una {@link Cuenta}
@@ -57,8 +60,11 @@ public class CuentaModel {
 		nombre = cuenta.getNombre();
 		saldo = cuenta.getSaldo();
 		porDefecto = cuenta.getPorDefecto();
-		divisaNombre = cuenta.getDivisa().getNombre();
-		divisaCodigo = cuenta.getDivisa().getCodigo();
+		divisa = new DivisaModel(cuenta.getDivisa());
+
+		if (cuenta.getEntidadFinanciera() != null) {
+			entidadFinanciera = new EntidadFinancieraModel(cuenta.getEntidadFinanciera());
+		}
 	}
 
 }

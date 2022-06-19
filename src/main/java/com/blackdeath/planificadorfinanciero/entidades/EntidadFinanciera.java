@@ -79,4 +79,13 @@ public class EntidadFinanciera implements Serializable {
 		fechaGuardado = new Date();
 	}
 
+	/**
+	 * Constructor que asigna el identificador único de esta entidad financiera
+	 * 
+	 * @param id
+	 */
+	public EntidadFinanciera(Long id) {
+		this.id = id;
+	}
+
 }

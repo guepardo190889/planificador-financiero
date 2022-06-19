@@ -9,6 +9,9 @@ package com.blackdeath.planificadorfinanciero.utilidades.constantes;
  */
 public class Constantes {
 
+	public static final long MAXIMO_SALDO = 999999999999L;
+	public static final long MINIMO_SALDO = -999999999999L;
+
 	/**
 	 * Constructor privado para evitar que esta clase sea instanciada
 	 */

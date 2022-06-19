@@ -76,11 +76,7 @@ public class CuentasController {
 		try {
 			Cuenta cuentaGuardada = service.guardar(cuenta);
 
-			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_GUARDADO);
-			response.put(LlaveRespuesta.CUENTA_INDIVIDUAL, new CuentaModel(cuentaGuardada));
-
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
-
+			return new ResponseEntity<CuentaModel>(new CuentaModel(cuentaGuardada), HttpStatus.CREATED);
 		} catch (DataAccessException dae) {
 			log.error(dae, dae);
 
@@ -175,8 +171,6 @@ public class CuentasController {
 	 */
 	@GetMapping
 	public ResponseEntity<?> buscarTodos() {
-		Map<String, Object> response = new HashMap<>();
-
 		try {
 			List<Cuenta> cuentasEncontradas = service.buscarTodos();
 
@@ -186,13 +180,12 @@ public class CuentasController {
 				modelos.add(new CuentaModel(cuentaEncontrada));
 			}
 
-			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_CONSULTA);
-			response.put(LlaveRespuesta.CUENTA_MULTIPLE, modelos);
-
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+			return new ResponseEntity<List<CuentaModel>>(modelos, HttpStatus.OK);
 
 		} catch (DataAccessException dae) {
 			log.error(dae, dae);
+
+			Map<String, Object> response = new HashMap<>();
 
 			response.put(LlaveRespuesta.ERROR, Mensajes.GENERICO_ERROR_CONSULTA);
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -215,10 +208,7 @@ public class CuentasController {
 			Optional<Cuenta> cuentaEncontrada = service.buscarPorId(id);
 
 			if (cuentaEncontrada.isPresent()) {
-				response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_CONSULTA);
-				response.put(LlaveRespuesta.CUENTA_INDIVIDUAL, new CuentaModel(cuentaEncontrada.get()));
-
-				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+				return new ResponseEntity<Cuenta>(cuentaEncontrada.get(), HttpStatus.OK);
 			} else {
 				response.put(LlaveRespuesta.ERROR, Mensajes.GENERICO_REGISTRO_NO_ENCONTRADO);
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
