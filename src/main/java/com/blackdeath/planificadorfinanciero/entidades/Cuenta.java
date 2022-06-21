@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.blackdeath.planificadorfinanciero.modelos.cuenta.CuentaGuardadoModel;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -69,14 +70,15 @@ public class Cuenta implements Serializable {
 	/**
 	 * {@link Divisa} de esta cuenta
 	 */
-	@JoinColumn(name = "id_divisa")
+	@JoinColumn(name = "divisa_id")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Divisa divisa;
 
 	/**
 	 * {@link EntidadFinanciera} de esta cuenta
 	 */
-	@JoinColumn(name = "id_entidad_financiera")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JoinColumn(name = "entidad_financiera_id")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private EntidadFinanciera entidadFinanciera;
 
