@@ -112,10 +112,7 @@ public class CuentasController {
 		try {
 			Cuenta cuentaActualizada = service.actualizar(id, cuenta);
 
-			response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_ACTUALIZADO);
-			response.put(LlaveRespuesta.CUENTA_INDIVIDUAL, new CuentaModel(cuentaActualizada));
-
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+			return new ResponseEntity<CuentaModel>(new CuentaModel(cuentaActualizada), HttpStatus.OK);
 		} catch (DataAccessException dae) {
 			log.error(dae, dae);
 
@@ -148,10 +145,7 @@ public class CuentasController {
 			Optional<Cuenta> cuentaEliminada = service.eliminar(id);
 
 			if (cuentaEliminada.isPresent()) {
-				response.put(LlaveRespuesta.MENSAJE, Mensajes.GENERICO_EXITO_ELIMINADO);
-				response.put(LlaveRespuesta.CUENTA_INDIVIDUAL, new CuentaModel(cuentaEliminada.get()));
-
-				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+				return new ResponseEntity<CuentaModel>(new CuentaModel(cuentaEliminada.get()), HttpStatus.OK);
 			} else {
 				response.put(LlaveRespuesta.ERROR, Mensajes.GENERICO_REGISTRO_NO_ENCONTRADO);
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
@@ -208,7 +202,7 @@ public class CuentasController {
 			Optional<Cuenta> cuentaEncontrada = service.buscarPorId(id);
 
 			if (cuentaEncontrada.isPresent()) {
-				return new ResponseEntity<Cuenta>(cuentaEncontrada.get(), HttpStatus.OK);
+				return new ResponseEntity<CuentaModel>(new CuentaModel(cuentaEncontrada.get()), HttpStatus.OK);
 			} else {
 				response.put(LlaveRespuesta.ERROR, Mensajes.GENERICO_REGISTRO_NO_ENCONTRADO);
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);

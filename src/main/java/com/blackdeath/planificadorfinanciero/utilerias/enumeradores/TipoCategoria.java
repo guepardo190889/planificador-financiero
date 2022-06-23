@@ -11,5 +11,5 @@ import lombok.Getter;
  */
 @Getter
 public enum TipoCategoria {
-	INGRESO, EGREO
+	INGRESO, EGRESO
 }

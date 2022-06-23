@@ -1,49 +1,39 @@
-package com.blackdeath.planificadorfinanciero.modelos;
+package com.blackdeath.planificadorfinanciero.modelos.categoria;
+
+import javax.validation.constraints.NotEmpty;
 
 import com.blackdeath.planificadorfinanciero.entidades.Categoria;
 import com.blackdeath.planificadorfinanciero.utilerias.enumeradores.TipoCategoria;
+import com.sun.istack.NotNull;
 
 import lombok.Data;
 
 /**
- * Modelo de datos para una {@link Categoria}
+ * Modelo de datos que contiene los datos necesarios para guardar una
+ * {@link Categoria}
  * 
  * @author Seth Karim Luis Martínez
  * @since 22-05-2022
  *
  */
 @Data
-public class CategoriaModel {
-
-	/**
-	 * Identificador único de esta categoría
-	 */
-	private Long id;
+public class CategoriaGuardadoModel {
 
 	/**
 	 * Nombre con el que se identifica esta categoría
 	 */
+	@NotNull
+	@NotEmpty
 	private String nombre;
 
 	/**
 	 * {@link TipoCategoria} que clasifica a esta categoría
 	 */
+	@NotNull
 	private TipoCategoria tipo;
 
 	/**
 	 * Descripción de esta categoría
 	 */
 	private String descripcion;
-
-	/**
-	 * Constructor que inicializa campos a partir de una {@link Categoria}
-	 * 
-	 * @param categoria
-	 */
-	public CategoriaModel(Categoria categoria) {
-		id = categoria.getId();
-		nombre = categoria.getNombre();
-		tipo = categoria.getTipo();
-		descripcion = categoria.getDescripcion();
-	}
 }

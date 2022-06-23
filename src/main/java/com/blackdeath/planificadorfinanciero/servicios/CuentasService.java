@@ -3,9 +3,6 @@ package com.blackdeath.planificadorfinanciero.servicios;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -73,7 +70,7 @@ public class CuentasService {
 	 * @param cuenta
 	 * @return
 	 */
-	public Cuenta actualizar(@NotNull Long id, @NotNull @Valid CuentaActualizadoModel cuenta) {
+	public Cuenta actualizar(Long id, CuentaActualizadoModel cuenta) {
 		Optional<Cuenta> cuentaEncontrada = buscarPorId(id);
 
 		if (cuentaEncontrada.isPresent()) {

@@ -1,5 +1,6 @@
 package com.blackdeath.planificadorfinanciero.entidades;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,10 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.blackdeath.planificadorfinanciero.modelos.CategoriaGuardadoModel;
+import com.blackdeath.planificadorfinanciero.modelos.categoria.CategoriaGuardadoModel;
 import com.blackdeath.planificadorfinanciero.utilerias.enumeradores.TipoCategoria;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Categoría que sirve para clasificar a un {@link Movimiento}
@@ -23,10 +25,13 @@ import lombok.Data;
  * @since 22-05-2022
  *
  */
+@NoArgsConstructor
 @Data
 @Table(name = "categorias")
 @Entity
-public class Categoria {
+public class Categoria implements Serializable {
+
+	private static final long serialVersionUID = 7540550502037628981L;
 
 	/**
 	 * Identificador único de esta categoría

@@ -3,9 +3,6 @@ package com.blackdeath.planificadorfinanciero.servicios;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.stereotype.Service;
 
 import com.blackdeath.planificadorfinanciero.entidades.EntidadFinanciera;
@@ -55,8 +52,7 @@ public class EntidadesFinancierasService {
 	 * @param entidadFinancieraActualizadoModel
 	 * @return
 	 */
-	public EntidadFinanciera actualizar(@NotNull Long id,
-			@NotNull @Valid EntidadFinancieraActualizadoModel entidadFinancieraActualizadoModel) {
+	public EntidadFinanciera actualizar(Long id, EntidadFinancieraActualizadoModel entidadFinancieraActualizadoModel) {
 		Optional<EntidadFinanciera> entidadFinancieraEncontrada = buscarPorId(id);
 
 		if (entidadFinancieraEncontrada.isPresent()) {
@@ -84,7 +80,7 @@ public class EntidadesFinancierasService {
 	 * @param id
 	 * @return
 	 */
-	public Optional<EntidadFinanciera> eliminar(@NotNull Long id) {
+	public Optional<EntidadFinanciera> eliminar(Long id) {
 		Optional<EntidadFinanciera> entidadFinancieraEncontrada = buscarPorId(id);
 
 		if (entidadFinancieraEncontrada.isPresent()) {
