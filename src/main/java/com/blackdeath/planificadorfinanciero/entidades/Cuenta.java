@@ -70,8 +70,9 @@ public class Cuenta implements Serializable {
 	/**
 	 * {@link Divisa} de esta cuenta
 	 */
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JoinColumn(name = "divisa_id")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Divisa divisa;
 
 	/**
@@ -79,7 +80,7 @@ public class Cuenta implements Serializable {
 	 */
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JoinColumn(name = "entidad_financiera_id")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private EntidadFinanciera entidadFinanciera;
 
 	/**
@@ -87,16 +88,18 @@ public class Cuenta implements Serializable {
 	 * desde una {@link CuentaGuardadoModel}
 	 * 
 	 * @param cuenta
+	 * @param divisa
+	 * @param entidadFinanciera
 	 */
-	public Cuenta(CuentaGuardadoModel cuenta) {
+	public Cuenta(CuentaGuardadoModel cuenta, Divisa divisa, EntidadFinanciera entidadFinanciera) {
 		nombre = cuenta.getNombre();
 		saldo = cuenta.getSaldo();
 		porDefecto = cuenta.getPorDefecto();
 		fechaGuardado = new Date();
-		divisa = new Divisa(cuenta.getDivisaId());
+		this.divisa = divisa;
 
-		if (cuenta.getEntidadFinancieraId() != null) {
-			entidadFinanciera = new EntidadFinanciera(cuenta.getEntidadFinancieraId());
+		if (entidadFinanciera != null) {
+			this.entidadFinanciera = entidadFinanciera;
 		}
 	}
 

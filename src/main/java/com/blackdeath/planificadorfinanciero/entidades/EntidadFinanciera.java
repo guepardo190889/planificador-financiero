@@ -44,20 +44,14 @@ public class EntidadFinanciera implements Serializable {
 	/**
 	 * Nombre con el que se identifica esta entidad financiera
 	 */
-	@Column(unique = true, nullable = false, updatable = true, length = 64)
+	@Column(unique = false, nullable = false, updatable = true, length = 128)
 	private String nombre;
-
-	/**
-	 * Descripción de esta entidad financiera
-	 */
-	@Column(unique = false, nullable = true, updatable = true, length = 128)
-	private String descripcion;
 
 	/**
 	 * {@link TipoEntidadFinanciera} que clasifica a esta entidad financiera
 	 */
 	@Enumerated(EnumType.STRING)
-	@Column(unique = false, nullable = true, updatable = true, length = 64)
+	@Column(unique = false, nullable = false, updatable = true, length = 64)
 	private TipoEntidadFinanciera tipo;
 
 	/**
@@ -74,7 +68,6 @@ public class EntidadFinanciera implements Serializable {
 	 */
 	public EntidadFinanciera(EntidadFinancieraGuardadoModel entidadFinanciera) {
 		nombre = entidadFinanciera.getNombre();
-		descripcion = entidadFinanciera.getDescripcion();
 		tipo = entidadFinanciera.getTipo();
 		fechaGuardado = new Date();
 	}

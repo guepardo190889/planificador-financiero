@@ -29,12 +29,6 @@ public class EntidadFinancieraGuardadoModel {
 	private String nombre;
 
 	/**
-	 * Descripción de esta entidad financiera
-	 */
-	@Size(min = 1, max = 128, message = "Descripción requiere entre 1 y 128 caracteres")
-	private String descripcion;
-
-	/**
 	 * {@link TipoEntidadFinanciera} que clasifica a esta entidad financiera
 	 */
 	private TipoEntidadFinanciera tipo;

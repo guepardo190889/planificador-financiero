@@ -7,11 +7,16 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.blackdeath.planificadorfinanciero.entidades.Cuenta;
+import com.blackdeath.planificadorfinanciero.entidades.Divisa;
+import com.blackdeath.planificadorfinanciero.entidades.EntidadFinanciera;
 import com.blackdeath.planificadorfinanciero.modelos.cuenta.CuentaActualizadoModel;
 import com.blackdeath.planificadorfinanciero.modelos.cuenta.CuentaGuardadoModel;
 import com.blackdeath.planificadorfinanciero.repositorios.CuentasRepository;
+import com.blackdeath.planificadorfinanciero.repositorios.DivisasRepository;
+import com.blackdeath.planificadorfinanciero.repositorios.EntidadesFinancierasRepository;
 import com.blackdeath.planificadorfinanciero.utilidades.constantes.Mensajes;
 import com.blackdeath.planificadorfinanciero.utilidades.excepciones.db.FilaDuplicadaException;
 import com.blackdeath.planificadorfinanciero.utilidades.excepciones.db.FilaNoEncontradaException;
@@ -30,6 +35,8 @@ import lombok.RequiredArgsConstructor;
 public class CuentasService {
 
 	private final CuentasRepository repository;
+	private final DivisasRepository divisaRepository;
+	private final EntidadesFinancierasRepository entidadFinancieraRepository;
 
 	/**
 	 * Guarda una nueva {@link Cuenta}
@@ -37,6 +44,7 @@ public class CuentasService {
 	 * @param cuentaGuardadoModel
 	 * @return
 	 */
+	@Transactional
 	public Cuenta guardar(CuentaGuardadoModel cuentaGuardadoModel) {
 		Cuenta cuentaEncontrada = repository.findByNombre(cuentaGuardadoModel.getNombre());
 
@@ -44,13 +52,18 @@ public class CuentasService {
 			throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
 		}
 
-		Cuenta cuentaGuardada = repository.save(new Cuenta(cuentaGuardadoModel));
+		Divisa divisa = divisaRepository.getReferenceById(cuentaGuardadoModel.getDivisaId());
+		EntidadFinanciera entidadFinanciera = cuentaGuardadoModel.getEntidadFinancieraId() != null
+				? entidadFinancieraRepository.getReferenceById(cuentaGuardadoModel.getEntidadFinancieraId())
+				: null;
+
+		Cuenta cuentaGuardada = repository.save(new Cuenta(cuentaGuardadoModel, divisa, entidadFinanciera));
 
 		if (cuentaGuardada.getPorDefecto()) {
 			repository.hacerPorDefecto(cuentaGuardada.getId());
 		}
 
-		return cuentaGuardada;
+		return buscarPorId(cuentaGuardada.getId()).get();
 	}
 
 	/**

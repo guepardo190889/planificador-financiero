@@ -49,7 +49,6 @@ public class EntidadFinancieraModel {
 	public EntidadFinancieraModel(EntidadFinanciera entidadFinanciera) {
 		id = entidadFinanciera.getId();
 		nombre = entidadFinanciera.getNombre();
-		descripcion = entidadFinanciera.getDescripcion();
 		tipo = new TipoEntidadFinancieraModel(entidadFinanciera.getTipo());
 	}
 

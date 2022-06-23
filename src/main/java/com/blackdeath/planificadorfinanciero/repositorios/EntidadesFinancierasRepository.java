@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.blackdeath.planificadorfinanciero.entidades.EntidadFinanciera;
+import com.blackdeath.planificadorfinanciero.utilerias.enumeradores.TipoEntidadFinanciera;
 
 /**
  * Repositorio de acceso a datos para {@link EntidadFinanciera}
@@ -18,18 +19,20 @@ import com.blackdeath.planificadorfinanciero.entidades.EntidadFinanciera;
 public interface EntidadesFinancierasRepository extends JpaRepository<EntidadFinanciera, Long> {
 
 	/**
-	 * Busca y devuelve una {@link EntidadFinanciera} por su {@code nombre}
+	 * Busca y devuelve una {@link EntidadFinanciera} por su {@code nombre} y
+	 * {@code tipo}
 	 * 
 	 * @param nombre
+	 * @param tipo
 	 * @return
 	 */
-	EntidadFinanciera findByNombre(String nombre);
+	EntidadFinanciera findByNombreAndTipo(String nombre, TipoEntidadFinanciera tipo);
 
 	/**
 	 * Busca y devuelve un listado con todas las {@link EntidadFinanciera} ordenadas
-	 * por su {@code nombre}
+	 * por su @cod {@code tipo} y {@code nombre}
 	 * 
 	 * @return
 	 */
-	List<EntidadFinanciera> findAllByOrderByNombreAsc();
+	List<EntidadFinanciera> findAllByOrderByNombreAscTipoAsc();
 }
