@@ -43,43 +43,65 @@ public class CuentasService {
 	 */
 	@Transactional
 	public Cuenta guardar(CuentaGuardadoModel cuentaGuardadoModel) {
-		Cuenta cuentaEncontrada = repository.findByNombre(cuentaGuardadoModel.getNombre());
+		Cuenta cuentaEncontrada = null;
 
-		if (cuentaEncontrada != null) {
+		if (cuentaGuardadoModel.getEntidadFinancieraId() != null) {
+			cuentaEncontrada = repository.findByNombreAndEntidadFinanciera_Id(cuentaGuardadoModel.getNombre(),
+					cuentaGuardadoModel.getEntidadFinancieraId());
+		} else {
+			cuentaEncontrada = repository.findByNombre(cuentaGuardadoModel.getNombre());
+		}
+
+		if (cuentaEncontrada == null) {
+			Divisa divisa = divisaRepository.getReferenceById(cuentaGuardadoModel.getDivisaId());
+			EntidadFinanciera entidadFinanciera = cuentaGuardadoModel.getEntidadFinancieraId() != null
+					? entidadFinancieraRepository.getReferenceById(cuentaGuardadoModel.getEntidadFinancieraId())
+					: null;
+
+			Cuenta cuentaGuardada = repository.save(new Cuenta(cuentaGuardadoModel, divisa, entidadFinanciera));
+
+			if (cuentaGuardada.getPorDefecto()) {
+				repository.hacerPorDefecto(cuentaGuardada.getId());
+			}
+
+			return buscarPorId(cuentaGuardada.getId()).get();
+
+		} else {
 			throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
 		}
-
-		Divisa divisa = divisaRepository.getReferenceById(cuentaGuardadoModel.getDivisaId());
-		EntidadFinanciera entidadFinanciera = cuentaGuardadoModel.getEntidadFinancieraId() != null
-				? entidadFinancieraRepository.getReferenceById(cuentaGuardadoModel.getEntidadFinancieraId())
-				: null;
-
-		Cuenta cuentaGuardada = repository.save(new Cuenta(cuentaGuardadoModel, divisa, entidadFinanciera));
-
-		if (cuentaGuardada.getPorDefecto()) {
-			repository.hacerPorDefecto(cuentaGuardada.getId());
-		}
-
-		return buscarPorId(cuentaGuardada.getId()).get();
 	}
 
 	/**
 	 * Actualiza una {@link Cuenta} existente
 	 * 
 	 * @param id
-	 * @param cuenta
+	 * @param cuentaActualizado
 	 * @return
 	 */
-	public Cuenta actualizar(Long id, CuentaActualizadoModel cuenta) {
+	public Cuenta actualizar(Long id, CuentaActualizadoModel cuentaActualizado) {
 		Optional<Cuenta> cuentaEncontrada = buscarPorId(id);
 
 		if (cuentaEncontrada.isPresent()) {
-			Cuenta cuentaConNombreCoincidente = repository.findByNombre(cuenta.getNombre());
+			Cuenta cuentaConNombreCoincidente = null;
+
+			if (cuentaActualizado.getEntidadFinancieraId() != null) {
+				cuentaConNombreCoincidente = repository.findByNombreAndEntidadFinanciera_Id(
+						cuentaActualizado.getNombre(), cuentaActualizado.getEntidadFinancieraId());
+			} else {
+				cuentaConNombreCoincidente = repository.findByNombre(cuentaActualizado.getNombre());
+			}
 
 			if (cuentaConNombreCoincidente == null) {
-				cuentaEncontrada.get().setNombre(cuenta.getNombre());
-				cuentaEncontrada.get().setSaldo(cuenta.getSaldo());
-				cuentaEncontrada.get().setPorDefecto(cuenta.getPorDefecto());
+				Divisa divisa = divisaRepository.getReferenceById(cuentaActualizado.getDivisaId());
+				EntidadFinanciera entidadFinanciera = cuentaActualizado.getEntidadFinancieraId() != null
+						? entidadFinancieraRepository.getReferenceById(cuentaActualizado.getEntidadFinancieraId())
+						: null;
+
+				cuentaEncontrada.get().setNombre(cuentaActualizado.getNombre());
+				cuentaEncontrada.get().setSaldo(cuentaActualizado.getSaldo());
+				cuentaEncontrada.get().setPorDefecto(cuentaActualizado.getPorDefecto());
+				cuentaEncontrada.get().setDivisa(divisa);
+				cuentaEncontrada.get().setEntidadFinanciera(entidadFinanciera);
 
 				Cuenta cuentaGuardada = repository.save(cuentaEncontrada.get());
 

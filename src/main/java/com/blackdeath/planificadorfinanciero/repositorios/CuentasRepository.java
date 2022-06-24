@@ -31,6 +31,16 @@ public interface CuentasRepository extends JpaRepository<Cuenta, Long> {
 	Cuenta findByNombre(String nombre);
 
 	/**
+	 * Busca y devuelve una {@link Cuenta} por su {@code nombre} y
+	 * {@code entidadFinancieraId}
+	 * 
+	 * @param nombre
+	 * @param entidadFinancieraId
+	 * @return
+	 */
+	Cuenta findByNombreAndEntidadFinanciera_Id(String nombre, Long entidadFinancieraId);
+
+	/**
 	 * Busca y devuelve un listado con todas las {@link Cuenta} ordenadas por su
 	 * {@code nombre}
 	 * 

@@ -46,7 +46,7 @@ public class Cuenta implements Serializable {
 	/**
 	 * Nombre con el que se identifica esta cuenta
 	 */
-	@Column(unique = true, nullable = false, updatable = true, length = 32)
+	@Column(unique = false, nullable = false, updatable = true, length = 32)
 	private String nombre;
 
 	/**
