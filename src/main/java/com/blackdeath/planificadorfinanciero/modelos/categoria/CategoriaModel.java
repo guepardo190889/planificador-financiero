@@ -1,6 +1,7 @@
 package com.blackdeath.planificadorfinanciero.modelos.categoria;
 
 import com.blackdeath.planificadorfinanciero.entidades.Categoria;
+import com.blackdeath.planificadorfinanciero.modelos.tipocategoria.TipoCategoriaModel;
 import com.blackdeath.planificadorfinanciero.utilerias.enumeradores.TipoCategoria;
 
 import lombok.Data;
@@ -26,9 +27,9 @@ public class CategoriaModel {
 	private String nombre;
 
 	/**
-	 * {@link TipoCategoria} que clasifica a esta categoría
+	 * Representación del {@link TipoCategoria} que clasifica a esta categoría
 	 */
-	private TipoCategoria tipo;
+	private TipoCategoriaModel tipo;
 
 	/**
 	 * Descripción de esta categoría
@@ -43,7 +44,7 @@ public class CategoriaModel {
 	public CategoriaModel(Categoria categoria) {
 		id = categoria.getId();
 		nombre = categoria.getNombre();
-		tipo = categoria.getTipo();
+		tipo = new TipoCategoriaModel(categoria.getTipo());
 		descripcion = categoria.getDescripcion();
 	}
 }

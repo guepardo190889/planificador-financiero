@@ -51,7 +51,7 @@ public class Categoria implements Serializable {
 	 * {@link TipoCategoria} que clasifica a esta categoría
 	 */
 	@Enumerated(EnumType.STRING)
-	@Column(unique = false, nullable = false, updatable = false, length = 7)
+	@Column(unique = false, nullable = false, updatable = true, length = 7)
 	private TipoCategoria tipo;
 
 	/**

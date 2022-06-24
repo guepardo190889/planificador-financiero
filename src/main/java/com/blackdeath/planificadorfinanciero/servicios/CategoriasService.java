@@ -49,24 +49,26 @@ public class CategoriasService {
 	 * Actualiza una {@link Categoria} existente
 	 * 
 	 * @param id
-	 * @param categoria
+	 * @param categoriaActualizado
 	 * @return
 	 */
-	public Categoria actualizar(Long id, CategoriaActualizadoModel categoria) {
+	public Categoria actualizar(Long id, CategoriaActualizadoModel categoriaActualizado) {
 		Optional<Categoria> categoriaEncontrada = buscarPorId(id);
 
 		if (categoriaEncontrada.isPresent()) {
-			Categoria categoriaConNombreCoincidente = repository.findByNombre(categoria.getNombre());
+			if (categoriaActualizado.isNombreNuevo(categoriaEncontrada.get().getNombre())) {
+				Categoria categoriaConNombreCoincidente = repository.findByNombre(categoriaActualizado.getNombre());
 
-			if (categoriaConNombreCoincidente == null) {
-				categoriaEncontrada.get().setNombre(categoria.getNombre());
-				categoriaEncontrada.get().setTipo(categoria.getTipo());
-				categoriaEncontrada.get().setDescripcion(categoria.getDescripcion());
-
-				return repository.save(categoriaEncontrada.get());
-			} else {
-				throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
+				if (categoriaConNombreCoincidente != null) {
+					throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
+				}
 			}
+			
+			categoriaEncontrada.get().setNombre(categoriaActualizado.getNombre());
+			categoriaEncontrada.get().setTipo(categoriaActualizado.getTipo());
+			categoriaEncontrada.get().setDescripcion(categoriaActualizado.getDescripcion());
+
+			return repository.save(categoriaEncontrada.get());
 		} else {
 			throw new FilaNoEncontradaException(Mensajes.GENERICO_REGISTRO_NO_ENCONTRADO);
 		}

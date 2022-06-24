@@ -11,5 +11,14 @@ import lombok.Getter;
  */
 @Getter
 public enum TipoCategoria {
-	INGRESO, EGRESO
+	INGRESO("Ingreso"), EGRESO("Egreso");
+
+	/**
+	 * Descripción de este tipo de categoría
+	 */
+	private String descripcion;
+
+	private TipoCategoria(String descripcion) {
+		this.descripcion = descripcion;
+	}
 }

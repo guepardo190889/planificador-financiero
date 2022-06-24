@@ -40,4 +40,17 @@ public class CategoriaActualizadoModel {
 	@Size(max = 128, message = "Descripción debe ser de máximo 128 caracteres")
 	private String descripcion;
 
+	/**
+	 * Verifica si el {@code nombre} que se va a actualizar para esta categoría es
+	 * diferente al nombre actual. Si los nombres son iguales se devuelve
+	 * {@code false}, de lo contrario {@code true}
+	 * <p>
+	 * 
+	 * @param nombreActual
+	 * @return {@code true} si el nombre es nuevo, de lo contrario {@code false}
+	 */
+	public boolean isNombreNuevo(String nombreActual) {
+		return !nombre.equals(nombreActual);
+	}
+
 }
