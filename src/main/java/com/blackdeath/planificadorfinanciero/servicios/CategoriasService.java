@@ -36,7 +36,8 @@ public class CategoriasService {
 	 * @return
 	 */
 	public Categoria guardar(CategoriaGuardadoModel categoriaGuardadoModel) {
-		Categoria categoriaEncontrada = repository.findByNombre(categoriaGuardadoModel.getNombre());
+		Categoria categoriaEncontrada = repository.findByNombreAndTipo(categoriaGuardadoModel.getNombre(),
+				categoriaGuardadoModel.getTipo());
 
 		if (categoriaEncontrada != null) {
 			throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
@@ -49,24 +50,25 @@ public class CategoriasService {
 	 * Actualiza una {@link Categoria} existente
 	 * 
 	 * @param id
-	 * @param categoriaActualizado
+	 * @param categoriaActualizadoModel
 	 * @return
 	 */
-	public Categoria actualizar(Long id, CategoriaActualizadoModel categoriaActualizado) {
+	public Categoria actualizar(Long id, CategoriaActualizadoModel categoriaActualizadoModel) {
 		Optional<Categoria> categoriaEncontrada = buscarPorId(id);
 
 		if (categoriaEncontrada.isPresent()) {
-			if (categoriaActualizado.isNombreNuevo(categoriaEncontrada.get().getNombre())) {
-				Categoria categoriaConNombreCoincidente = repository.findByNombre(categoriaActualizado.getNombre());
+			if (categoriaActualizadoModel.isNombreNuevo(categoriaEncontrada.get().getNombre())) {
+				Categoria categoriaCoincidente = repository.findByNombreAndTipo(categoriaActualizadoModel.getNombre(),
+						categoriaActualizadoModel.getTipo());
 
-				if (categoriaConNombreCoincidente != null) {
+				if (categoriaCoincidente != null) {
 					throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
 				}
 			}
-			
-			categoriaEncontrada.get().setNombre(categoriaActualizado.getNombre());
-			categoriaEncontrada.get().setTipo(categoriaActualizado.getTipo());
-			categoriaEncontrada.get().setDescripcion(categoriaActualizado.getDescripcion());
+
+			categoriaEncontrada.get().setNombre(categoriaActualizadoModel.getNombre());
+			categoriaEncontrada.get().setTipo(categoriaActualizadoModel.getTipo());
+			categoriaEncontrada.get().setDescripcion(categoriaActualizadoModel.getDescripcion());
 
 			return repository.save(categoriaEncontrada.get());
 		} else {
