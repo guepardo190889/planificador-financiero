@@ -36,10 +36,10 @@ public class CategoriasService {
 	 * @return
 	 */
 	public Categoria guardar(CategoriaGuardadoModel categoriaGuardadoModel) {
-		Categoria categoriaEncontrada = repository.findByNombreAndTipo(categoriaGuardadoModel.getNombre(),
+		Categoria categoriaCoincidente = repository.buscarCategoriaDuplicada(categoriaGuardadoModel.getNombre(),
 				categoriaGuardadoModel.getTipo());
 
-		if (categoriaEncontrada != null) {
+		if (categoriaCoincidente != null) {
 			throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
 		}
 
@@ -57,13 +57,11 @@ public class CategoriasService {
 		Optional<Categoria> categoriaEncontrada = buscarPorId(id);
 
 		if (categoriaEncontrada.isPresent()) {
-			if (categoriaActualizadoModel.isNombreNuevo(categoriaEncontrada.get().getNombre())) {
-				Categoria categoriaCoincidente = repository.findByNombreAndTipo(categoriaActualizadoModel.getNombre(),
-						categoriaActualizadoModel.getTipo());
+			Categoria categoriaCoincidente = repository.buscarCategoriaDuplicada(categoriaActualizadoModel.getNombre(),
+					categoriaActualizadoModel.getTipo(), id);
 
-				if (categoriaCoincidente != null) {
-					throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
-				}
+			if (categoriaCoincidente != null) {
+				throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
 			}
 
 			categoriaEncontrada.get().setNombre(categoriaActualizadoModel.getNombre());
