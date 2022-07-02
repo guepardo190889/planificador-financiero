@@ -97,10 +97,7 @@ public class Cuenta implements Serializable {
 		porDefecto = cuenta.getPorDefecto();
 		fechaGuardado = new Date();
 		this.divisa = divisa;
-
-		if (entidadFinanciera != null) {
-			this.entidadFinanciera = entidadFinanciera;
-		}
+		this.entidadFinanciera = entidadFinanciera;
 	}
 
 }

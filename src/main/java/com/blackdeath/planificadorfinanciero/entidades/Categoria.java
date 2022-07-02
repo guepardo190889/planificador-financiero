@@ -7,13 +7,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.blackdeath.planificadorfinanciero.modelos.categoria.CategoriaGuardadoModel;
 import com.blackdeath.planificadorfinanciero.utilerias.enumeradores.TipoCategoria;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -55,6 +59,14 @@ public class Categoria implements Serializable {
 	private TipoCategoria tipo;
 
 	/**
+	 * {@link Categoria} a la que pertenece esta categoría
+	 */
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JoinColumn(name = "categoria_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Categoria categoria;
+
+	/**
 	 * Descripción de esta categoría
 	 */
 	@Column(unique = false, nullable = true, updatable = true, length = 128)
@@ -70,11 +82,13 @@ public class Categoria implements Serializable {
 	 * Constructor que inicializa campos desde una {@link CategoriaGuardadoModel}
 	 * 
 	 * @param categoria
+	 * @param categoriaPrincipal
 	 */
-	public Categoria(CategoriaGuardadoModel categoria) {
+	public Categoria(CategoriaGuardadoModel categoria, Categoria categoriaPrincipal) {
 		nombre = categoria.getNombre();
 		tipo = categoria.getTipo();
 		descripcion = categoria.getDescripcion();
 		fechaGuardado = new Date();
+		this.categoria = categoriaPrincipal;
 	}
 }

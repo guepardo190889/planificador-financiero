@@ -39,11 +39,15 @@ public class CategoriasService {
 		Categoria categoriaCoincidente = repository.buscarCategoriaDuplicada(categoriaGuardadoModel.getNombre(),
 				categoriaGuardadoModel.getTipo());
 
-		if (categoriaCoincidente != null) {
+		if (categoriaCoincidente == null) {
+			Categoria categoriaPrincipal = categoriaGuardadoModel.getCategoriaId() != null
+					? repository.getReferenceById(categoriaGuardadoModel.getCategoriaId())
+					: null;
+
+			return repository.save(new Categoria(categoriaGuardadoModel, categoriaPrincipal));
+		} else {
 			throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
 		}
-
-		return repository.save(new Categoria(categoriaGuardadoModel));
 	}
 
 	/**
@@ -60,15 +64,20 @@ public class CategoriasService {
 			Categoria categoriaCoincidente = repository.buscarCategoriaDuplicada(categoriaActualizadoModel.getNombre(),
 					categoriaActualizadoModel.getTipo(), id);
 
-			if (categoriaCoincidente != null) {
+			if (categoriaCoincidente == null) {
+				Categoria categoriaPrincipal = categoriaActualizadoModel.getCategoriaId() != null
+						? repository.getReferenceById(categoriaActualizadoModel.getCategoriaId())
+						: null;
+
+				categoriaEncontrada.get().setNombre(categoriaActualizadoModel.getNombre());
+				categoriaEncontrada.get().setTipo(categoriaActualizadoModel.getTipo());
+				categoriaEncontrada.get().setDescripcion(categoriaActualizadoModel.getDescripcion());
+				categoriaEncontrada.get().setCategoria(categoriaPrincipal);
+
+				return repository.save(categoriaEncontrada.get());
+			} else {
 				throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
 			}
-
-			categoriaEncontrada.get().setNombre(categoriaActualizadoModel.getNombre());
-			categoriaEncontrada.get().setTipo(categoriaActualizadoModel.getTipo());
-			categoriaEncontrada.get().setDescripcion(categoriaActualizadoModel.getDescripcion());
-
-			return repository.save(categoriaEncontrada.get());
 		} else {
 			throw new FilaNoEncontradaException(Mensajes.GENERICO_REGISTRO_NO_ENCONTRADO);
 		}

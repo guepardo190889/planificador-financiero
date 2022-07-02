@@ -65,7 +65,6 @@ public class CuentasService {
 			}
 
 			return buscarPorId(cuentaGuardada.getId()).get();
-
 		} else {
 			throw new FilaDuplicadaException(Mensajes.GENERICO_REGISTRO_DUPLICADO);
 		}

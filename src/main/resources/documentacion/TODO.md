@@ -9,3 +9,5 @@ El editor de markdown utilizado es  [Stackedit](https://stackedit.io/app#).
 - Así como existen los Ingresos y Egresos podrían existir las Inversiones que internamente serían un Egreso, pero tendrían una "bandera" especial que los categorizaría como Inversión y de esta manera de puede obtener una gráfica de Inversión separada de Gasto. La gráfica de Gasto puede tener siempre una configuración que le permita incluir las Inversiones.
 - Podríamos tener una sección para el manejo de "cuentas" de "Crédito" (con alguna institución) o "Deuda" (en lugares no institucionales)
 - Las categorías se compondrán de dos tipos: Principales y Secundarias. Las Principales serán con las que se podrá trabajar un Presupuesto, definiendo los límites por cada una de ellas. Las categorías Secundarias son para generar gráficas o reportes más detallados.
+- Las cuentas podrían tener un tipo: Débito, Crédito e Inversión y se podrían mostrar en una pantalla separadas por esa clasificación
+- Cambiar todos los "por_defecto" por Predeterminado!

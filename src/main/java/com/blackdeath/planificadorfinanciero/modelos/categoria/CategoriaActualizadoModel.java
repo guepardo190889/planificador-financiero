@@ -1,5 +1,6 @@
 package com.blackdeath.planificadorfinanciero.modelos.categoria;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,6 +34,12 @@ public class CategoriaActualizadoModel {
 	 */
 	@NotNull(message = "Tipo de categoría es requerido")
 	private TipoCategoria tipo;
+
+	/**
+	 * {@link Categoria} a la que pertenece esta categoría
+	 */
+	@Min(value = 1, message = "Identificador único de categoría debe ser positivo")
+	private Long categoriaId;
 
 	/**
 	 * Descripción de esta categoría
