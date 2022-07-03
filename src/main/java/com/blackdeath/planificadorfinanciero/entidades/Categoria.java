@@ -63,7 +63,7 @@ public class Categoria implements Serializable {
 	 */
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JoinColumn(name = "categoria_id")
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Categoria categoria;
 
 	/**

@@ -89,7 +89,7 @@ public class CategoriasService {
 	 * @return
 	 */
 	public List<Categoria> buscarTodos() {
-		return repository.findAllByOrderByNombreAsc();
+		return repository.findAllByOrderByCategoria_IdAscNombreAsc();
 	}
 
 	/**

@@ -49,6 +49,6 @@ public interface CategoriasRepository extends JpaRepository<Categoria, Long> {
 	 * 
 	 * @return
 	 */
-	List<Categoria> findAllByOrderByNombreAsc();
+	List<Categoria> findAllByOrderByCategoria_IdAscNombreAsc();
 
 }
