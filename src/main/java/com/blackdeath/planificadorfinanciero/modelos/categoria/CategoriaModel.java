@@ -34,7 +34,7 @@ public class CategoriaModel {
 	/**
 	 * Representación de la {@link Categoria} a la que pertenece esta categoría
 	 */
-	private CategoriaModel categoria;
+	private CategoriaModel categoriaPadre;
 
 	/**
 	 * Descripción de esta categoría
@@ -51,6 +51,7 @@ public class CategoriaModel {
 		nombre = categoria.getNombre();
 		tipo = new TipoCategoriaModel(categoria.getTipo());
 		descripcion = categoria.getDescripcion();
-		this.categoria = categoria.getCategoria() != null ? new CategoriaModel(categoria.getCategoria()) : null;
+		this.categoriaPadre = categoria.getCategoriaPadre() != null ? new CategoriaModel(categoria.getCategoriaPadre())
+				: null;
 	}
 }

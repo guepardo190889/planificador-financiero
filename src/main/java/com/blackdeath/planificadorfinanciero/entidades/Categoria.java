@@ -62,9 +62,9 @@ public class Categoria implements Serializable {
 	 * {@link Categoria} a la que pertenece esta categoría
 	 */
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@JoinColumn(name = "categoria_id")
+	@JoinColumn(name = "categoria_padre_id")
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Categoria categoria;
+	private Categoria categoriaPadre;
 
 	/**
 	 * Descripción de esta categoría
@@ -82,13 +82,13 @@ public class Categoria implements Serializable {
 	 * Constructor que inicializa campos desde una {@link CategoriaGuardadoModel}
 	 * 
 	 * @param categoria
-	 * @param categoriaPrincipal
+	 * @param categoriaPadre
 	 */
-	public Categoria(CategoriaGuardadoModel categoria, Categoria categoriaPrincipal) {
+	public Categoria(CategoriaGuardadoModel categoria, Categoria categoriaPadre) {
 		nombre = categoria.getNombre();
 		tipo = categoria.getTipo();
 		descripcion = categoria.getDescripcion();
 		fechaGuardado = new Date();
-		this.categoria = categoriaPrincipal;
+		this.categoriaPadre = categoriaPadre;
 	}
 }
