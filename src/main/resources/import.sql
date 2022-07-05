@@ -10,7 +10,7 @@ insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado)
 insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 3.1', 'INGRESO', 6, '', now()); --7
 insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 3.2', 'INGRESO', 6, '', now()); --8
 
-insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 1.4', 'INGRESO', 1, '', now()); --9
+insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 1.4', 'INGRESO', 2, '', now()); --9
 insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 2.1', 'INGRESO', 5, '', now()); --10
 insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 3.3', 'INGRESO', 6, '', now()); --11
 insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 4', 'INGRESO', 1, '', now()); --12
