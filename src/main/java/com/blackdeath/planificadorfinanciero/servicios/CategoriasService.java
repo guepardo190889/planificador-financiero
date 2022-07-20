@@ -72,7 +72,7 @@ public class CategoriasService {
 				categoriaEncontrada.get().setNombre(categoriaActualizadoModel.getNombre());
 				categoriaEncontrada.get().setTipo(categoriaActualizadoModel.getTipo());
 				categoriaEncontrada.get().setDescripcion(categoriaActualizadoModel.getDescripcion());
-				categoriaEncontrada.get().setCategoriaPadre(categoriaPrincipal);
+				categoriaEncontrada.get().setCategoria(categoriaPrincipal);
 
 				return repository.save(categoriaEncontrada.get());
 			} else {

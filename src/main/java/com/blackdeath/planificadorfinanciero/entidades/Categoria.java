@@ -64,7 +64,7 @@ public class Categoria implements Serializable {
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JoinColumn(name = "categoria_padre_id")
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Categoria categoriaPadre;
+	private Categoria categoria;
 
 	/**
 	 * Descripción de esta categoría
@@ -89,6 +89,6 @@ public class Categoria implements Serializable {
 		tipo = categoria.getTipo();
 		descripcion = categoria.getDescripcion();
 		fechaGuardado = new Date();
-		this.categoriaPadre = categoriaPadre;
+		this.categoria = categoriaPadre;
 	}
 }

@@ -1,20 +1,20 @@
 /* Inserta categorías por defecto */
-insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Principal', 'INGRESO', null, '', now()); --1
+--insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Principal', 'INGRESO', null, '', now()); --1
 
-insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 1', 'INGRESO', 1, '', now()); --2
-insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 1.1', 'INGRESO', 2, '', now()); --3
-insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 1.2', 'INGRESO', 2, '', now()); --4
+--insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 1', 'INGRESO', 1, '', now()); --2
+--insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 1.1', 'INGRESO', 2, '', now()); --3
+--insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 1.2', 'INGRESO', 2, '', now()); --4
 
-insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 2', 'INGRESO', 1, '', now()); --5
-insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 3', 'INGRESO', 1, '', now()); --6
-insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 3.1', 'INGRESO', 6, '', now()); --7
-insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 3.2', 'INGRESO', 6, '', now()); --8
+--insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 2', 'INGRESO', 1, '', now()); --5
+--insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 3', 'INGRESO', 1, '', now()); --6
+--insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 3.1', 'INGRESO', 6, '', now()); --7
+--insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 3.2', 'INGRESO', 6, '', now()); --8
 
-insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 1.4', 'INGRESO', 2, '', now()); --9
-insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 2.1', 'INGRESO', 5, '', now()); --10
-insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 3.3', 'INGRESO', 6, '', now()); --11
-insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 4', 'INGRESO', 1, '', now()); --12
-insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 3.3.1', 'INGRESO', 11, '', now());
+--insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 1.4', 'INGRESO', 2, '', now()); --9
+--insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 2.1', 'INGRESO', 5, '', now()); --10
+--insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 3.3', 'INGRESO', 6, '', now()); --11
+--insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 4', 'INGRESO', 1, '', now()); --12
+--insert into categorias (nombre, tipo, categoria_id, descripcion, fecha_guardado) values ('Categoría 3.3.1', 'INGRESO', 11, '', now());
 
 /* Insertar divisas por defecto*/
 insert into divisas (nombre, codigo, por_defecto, fecha_guardado) values('Peso Mexicano', 'MXN', true, now());

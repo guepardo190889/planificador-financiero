@@ -51,7 +51,7 @@ public class CategoriaModel {
 		nombre = categoria.getNombre();
 		tipo = new TipoCategoriaModel(categoria.getTipo());
 		descripcion = categoria.getDescripcion();
-		this.categoriaPadre = categoria.getCategoriaPadre() != null ? new CategoriaModel(categoria.getCategoriaPadre())
+		this.categoriaPadre = categoria.getCategoria() != null ? new CategoriaModel(categoria.getCategoria())
 				: null;
 	}
 }
